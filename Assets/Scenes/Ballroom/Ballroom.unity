@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.9727, g: 1836.0449, b: 2430.713, a: 1}
+  m_IndirectSpecularColor: {r: 2082, g: 2082, b: 2082, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &53427483
 Transform:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53427482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.671, y: 4.033, z: 1.216}
+  m_LocalPosition: {x: 11.71, y: 4.033, z: 1.216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 219763271}
@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &79995742
 Transform:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79995741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.671, y: 1.9, z: 1.216}
+  m_LocalPosition: {x: 11.71, y: 1.9, z: 1.216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 219763271}
@@ -1382,7 +1382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &362076885
 Transform:
   m_ObjectHideFlags: 0
@@ -1391,7 +1391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362076884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.671, y: 1.9000001, z: -1.108}
+  m_LocalPosition: {x: 11.71, y: 1.9000001, z: -1.108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 219763271}
@@ -1629,7 +1629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &428908313
 Transform:
   m_ObjectHideFlags: 0
@@ -1638,7 +1638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428908312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.671, y: 4.033, z: -1.108}
+  m_LocalPosition: {x: 11.71, y: 4.033, z: -1.108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 219763271}
@@ -2620,7 +2620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788585465}
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.08, y: 6.37, z: -0.38}
+  m_LocalPosition: {x: -0.08, y: 7.77, z: -0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 219763271}
@@ -2652,10 +2652,10 @@ MonoBehaviour:
   m_InnerSpotPercent: 66.2
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 4
   m_LightUnit: 2
   m_FadeDistance: 10000
-  m_VolumetricFadeDistance: 10000
+  m_VolumetricFadeDistance: 100000
   m_AffectDiffuse: 1
   m_AffectSpecular: 1
   m_NonLightmappedOnly: 0
@@ -3099,7 +3099,7 @@ MonoBehaviour:
     mode: 1
     realtimeMode: 1
     lighting:
-      multiplier: 1
+      multiplier: 2
       weight: 1
       lightLayer: 1
       fadeDistance: 10000
@@ -4484,31 +4484,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0903795
+      value: -9.234722
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7914695
+      value: 2.172248
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9948587
+      value: -9.827974
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.984918
+      value: 0.93587035
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.11158572
+      value: 0.047085274
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13139375
+      value: 0.34876722
       objectReference: {fileID: 0}
     - target: {fileID: 1593205710513468862, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.014861769
+      value: -0.017063834
       objectReference: {fileID: 0}
     - target: {fileID: 1612986841743735477, guid: 2bfa7b9d63fa79e4abdc033f54a868d2, type: 3}
       propertyPath: dithering

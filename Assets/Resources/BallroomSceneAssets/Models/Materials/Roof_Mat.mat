@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Roof_Connect_wCorner-Roof_Connect_wCorner_Mat
+  m_Name: Roof_Mat
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _EMISSIVE_COLOR_MAP _ENABLE_GEOMETRIC_SPECULAR_AA
     _MASKMAP _MATERIAL_FEATURE_SPECULAR_COLOR _NORMALMAP _NORMALMAP_TANGENT_SPACE
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 6ee618ccf10d2bc498d00344937e6902, type: 3}
+        m_Texture: {fileID: 2800000, guid: a9b7997a83edc1e4f833110489a2a1ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
-        m_Texture: {fileID: 2800000, guid: 09bf94c867de8414394daa5182304954, type: 3}
+        m_Texture: {fileID: 2800000, guid: 94a832dff2e9de841b905606830f23fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -72,15 +72,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6ee618ccf10d2bc498d00344937e6902, type: 3}
+        m_Texture: {fileID: 2800000, guid: a9b7997a83edc1e4f833110489a2a1ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 1ba3da9b921e2a44c877780301c7d3c1, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9d0a411b5074eb4e84babdfbefb11f4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 076bcafe77fc56e48819f9e9cccb5946, type: 3}
+        m_Texture: {fileID: 2800000, guid: c3d1186902bd46e44af8b79db3f6de65, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -88,7 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
-        m_Texture: {fileID: 2800000, guid: e3a02a8b75524ed4abaf48f7ae9d7641, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d756d3e887967f4fbf132fc5030777a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubsurfaceMaskMap:
@@ -218,7 +218,7 @@ Material:
     - _RefractionModel: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
-    - _SmoothnessRemapMin: 0
+    - _SmoothnessRemapMin: 0.7725025
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
@@ -278,7 +278,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &3302876576642845030
+--- !u!114 &7005042496323259760
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
