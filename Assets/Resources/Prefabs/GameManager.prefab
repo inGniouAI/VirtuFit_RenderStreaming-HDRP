@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8108215211609174415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8108215211609174409}
+  - component: {fileID: 8108215211609174408}
+  - component: {fileID: 370760243}
+  - component: {fileID: 370760245}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8108215211609174409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8108215211609174415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.98814094, y: -0.7414572, z: -1.0085764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8108215211609174408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8108215211609174415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52976f9e9e8657342ab63070413f0cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RenderStreamCam: {fileID: 0}
+  isRunFromCmd: 1
+  ModelLoadedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AvatarDirectory: 
+  GlobalAvatarType: 2
+  TextureDirectory: 
+  UnstitchedObj: {fileID: 0}
+  Unstitched_CholiMat: {fileID: 2100000, guid: 59c770ac3e64b10459923d455c1da342, type: 2}
+  StitchedObj: {fileID: 0}
+  Stitched_CholiMat: {fileID: 2100000, guid: 00c7549eabf0855448c5e889156f2daa, type: 2}
+  GhaghraObj: {fileID: 0}
+  GhaghraMat: {fileID: 2100000, guid: 525e8306fdd8b8f4c91dbf6b88ebfeac, type: 2}
+  MyTwin: {fileID: 0}
+  AvatarCode: 
+  GlobalGameState: 0
+  GlobalProductType: 0
+--- !u!114 &370760243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8108215211609174415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918a3613e00c435c98d95e554e54c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderStreaming: {fileID: 0}
+  enableHWCodec: 0
+  signalingType: 0
+  signalingAddress: localhost:8000
+  signalingSecured: 0
+--- !u!114 &370760245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8108215211609174415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47bbb914253f42fbb4e229732259107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
