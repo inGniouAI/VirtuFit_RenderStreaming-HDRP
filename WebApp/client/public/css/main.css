@@ -1,0 +1,170 @@
+body {
+  margin: 0px;
+}
+
+#player {
+ /*position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #323232;*/
+
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #323232;
+}
+
+#player:before {
+  content: "";
+  display: block;
+  padding-top: 66%;
+}
+
+#playButton {
+  width: 15%;
+  max-width: 200px;
+  cursor: pointer;
+}
+
+#Video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#VideoThumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 30%;
+}
+#fullscreenButton {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 32px;
+  height: 32px;
+}
+.contentMenu {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 1600px;
+  height: 2560px;
+}
+#SKUInputText {
+  position: absolute;
+  width: 15%;
+  max-width: 200px;
+  bottom: 20px;
+  left: 10px;
+  cursor: pointer;
+}
+
+#startButton {
+  position: absolute;
+  width: 15%;
+  max-width: 200px;
+  bottom: 20px;
+  left: 180px;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+#SKUButton {
+  position: absolute;
+  width: 15%;
+  max-width: 200px;
+  bottom: 20px;
+  left: 380px;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+#greenButton {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 160px;
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#blueButton {
+  position: absolute;
+  bottom: 10px;
+  left: 180px;
+  width: 160px;
+  background-color: #447FAF;
+  /* Blue */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#orangeButton {
+  position: absolute;
+  bottom: 10px;
+  left: 350px;
+  width: 160px;
+  background-color: #FF7700;
+  /* Blue */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.overlay {
+  height: 2560px;
+  width: 1600px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.0s;
+  }
+  .overlay-content {
+    margin: 0;
+    position: absolute;
+    height: 1000px;
+    width: 700px;
+    vertical-align: middle;
+    font-size: 60px;
+    background-color: rgb(246, 246, 246);
+
+    }
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    }

@@ -14,7 +14,7 @@ public class CommandLineArgHandler : MonoBehaviour
 	void Awake ()
 	{
         args = string.Join("\n", System.Environment.GetCommandLineArgs());
-        SetParam();
+       // SetParam();
 	}
 	void OnGUI()
 	{
@@ -22,7 +22,6 @@ public class CommandLineArgHandler : MonoBehaviour
 	}
   private void SetParam()
 {           
-
    var CmdArgs = System.Environment.GetCommandLineArgs();
     for (int i = 0; i < CmdArgs.Length; i++)
     {
@@ -33,7 +32,7 @@ public class CommandLineArgHandler : MonoBehaviour
             Debug.Log("SignalingUrl "+SignalingUrl);
 
         }
-        else if( CmdArgs[i] == AvatarCodeParamName && CmdArgs.Length > i + 1){
+        else if(CmdArgs[i] == AvatarCodeParamName && CmdArgs.Length > i + 1){
             GameManager.Instance.UpdateAvatarCode(CmdArgs[i+1]);
             AvatarCode = CmdArgs[i+1];
             Debug.Log("AvatarCode "+AvatarCode);

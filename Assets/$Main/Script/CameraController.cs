@@ -214,11 +214,15 @@ private void LookRotationCamera(Vector2 input){
      }
 }
 private void LookRotation(){
+     if(GameManager.Instance.MyTwin!=null) {
+
      Vector3 lookPos = GameManager.Instance.MyTwin.transform.position - transform.position;
         Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
         float eulerY = lookRot.eulerAngles.y;
         Quaternion rotation = Quaternion.Euler (0, eulerY, 0);
         transform.rotation = rotation;
+
+    }
 }
     private float targetZoom;
     public float zoomFactor = 0.01f;

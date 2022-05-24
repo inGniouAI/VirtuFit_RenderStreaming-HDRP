@@ -6,7 +6,7 @@ using System;
 using ingenious.models;
 using System.IO;
 
-public class VirtuFit : MonoBehaviour
+public class VirtuFit : GenericSingleton<VirtuFit>
 {
     [SerializeField] private List<AvatarPresetData> avatarPresets;
     public string apparelName = null;
@@ -23,12 +23,14 @@ public class VirtuFit : MonoBehaviour
 
     private void Start()
     {
-        ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+      //  ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+        GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+
     }
 
     #region GLTF Model Loading
 
-    private void ImportGLBAsync(string filepath)
+    public void ImportGLBAsync(string filepath)
     {
         Importer.ImportGLBAsync(filepath, new ImportSettings(), OnFinishAsync);
     }
@@ -40,7 +42,6 @@ public class VirtuFit : MonoBehaviour
         LoadClothing();
         GameManager.Instance.GetReferences();
         Animate();
-        GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
        
     }
     #endregion
