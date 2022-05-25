@@ -47,13 +47,19 @@ public class WebInput : WebBrowserInputChannelReceiver
             {
                 case EventType.stringinput:
                 Debug.Log("match 6 = "+str[0]);
-                Debug.Log("inputtext = "+str);
-                GameManager.Instance.UpdateAvatarCode();    
+                str = str.Remove(0,1);
+                Debug.Log("UpdateAvatarCode = "+str);
+                string trimString = str;
+
+                trimString = str.Replace("/","");
+                Debug.Log("trimString = "+trimString);
+
+                GameManager.Instance.UpdateAvatarCode(trimString);    
                 VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
                break;
             
             }
-        }
+           }
 
     public override void OnButtonClick(int elementId)
         {
