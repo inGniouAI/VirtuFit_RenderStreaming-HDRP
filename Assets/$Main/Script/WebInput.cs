@@ -46,10 +46,10 @@ public class WebInput : WebBrowserInputChannelReceiver
              switch ((EventType)inputtextenum)
             {
                 case EventType.stringinput:
-                   Debug.Log("match 6 = "+str[0]);
+                Debug.Log("match 6 = "+str[0]);
                 Debug.Log("inputtext = "+str);
                 GameManager.Instance.UpdateAvatarCode();    
-                  VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+                VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
                break;
             
             }
