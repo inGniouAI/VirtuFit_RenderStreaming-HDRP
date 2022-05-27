@@ -23,8 +23,9 @@ public class VirtuFit : GenericSingleton<VirtuFit>
 
     private void Start()
     {
-      //  ImportGLBAsync(GameManager.Instance.AvatarDirectory);
-     //   GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+        // GameManager.Instance.UpdateAvatarCode();    
+        // ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+        // GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
 
     }
 
