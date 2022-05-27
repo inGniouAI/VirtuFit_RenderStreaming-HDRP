@@ -1,7 +1,0 @@
-{
-   "pipeline" : "body_0.3",
-   "pipeline_subtype" : "mobile",
-   "remove_glasses" : false,
-   "remove_smile" : false,
-   "scale" : 0.9984366893768311
-}
