@@ -54,8 +54,8 @@ public class GameManager : GenericSingleton<GameManager>
            TextureDirectory = $"{Application.dataPath}/VirtuFit_Directory";
 #endif
 #if UNITY_STANDALONE_LINUX
-           AvatarDirectory = $"/home/ubuntu/Documents/VirtuFit/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-           TextureDirectory = $"/home/ubuntu/Documents/VirtuFit/VirtuFit_Textures";
+           AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+           TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
 #endif
 #if UNITY_STANDALONE_OSX
             AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
@@ -173,8 +173,8 @@ public class GameManager : GenericSingleton<GameManager>
            TextureDirectory = $"{Application.dataPath}/VirtuFit_Directory";
 #endif
 #if UNITY_STANDALONE_LINUX
-           AvatarDirectory = $"/home/ubuntu/Documents/VirtuFit/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-           TextureDirectory = $"/home/ubuntu/Documents/VirtuFit/VirtuFit_Textures";
+           AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+           TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
 #endif
 #if UNITY_STANDALONE_OSX
             AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
