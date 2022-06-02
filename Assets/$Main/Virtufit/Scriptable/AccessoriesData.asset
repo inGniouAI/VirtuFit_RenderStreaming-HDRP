@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1f83510cb404efa9f59c9e4c86971d, type: 3}
+  m_Name: AccessoriesData
+  m_EditorClassIdentifier: 
+  BanglesList:
+  - {fileID: 9202931084599227507, guid: 878dd78857b7e40848f37c986bf183b4, type: 3}
+  NecklaceList:
+  - {fileID: 8064751350167075233, guid: c695d5408194b4182a349f87e346a701, type: 3}

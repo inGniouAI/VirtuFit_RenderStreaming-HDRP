@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.9727, g: 1836.0448, b: 2430.713, a: 1}
+  m_IndirectSpecularColor: {r: 1249.82, g: 1597.4819, b: 2177.206, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -961,6 +961,7 @@ MonoBehaviour:
     type: 4
   apparelName: 
   animationRig: {fileID: 9000000, guid: 903fa863bff1f494c9173a23f0feb8fe, type: 3}
+  AccessoriesData: {fileID: 11400000, guid: 456168ed68f654f588ce420a1f1a0fc0, type: 2}
 --- !u!4 &847398299
 Transform:
   m_ObjectHideFlags: 0

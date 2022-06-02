@@ -9,7 +9,11 @@ const InputEvent = {
   Touch: 3,
   ButtonClick: 4,
   Gamepad: 5,
-  InputText :6
+  InputText :6,
+  EnvId :7,
+  NecklaceId :8,
+  Bangles :9
+
 };
 
 const KeyboardEventType = {
@@ -308,29 +312,16 @@ export function sendClickEvent(videoPlayer, elementId) {
 }
 
 export function sendInputTextEvent(videoPlayer, inputText) {
-  
-  // let data = new DataView(new ArrayBuffer(16));
-  // data.setUint8(0, InputEvent.InputText);
-  // data.setInt32(1, inputText, true);
-  // videoPlayer && videoPlayer.sendMsg(data.buffer);
- // org.apache.commons.codec.binary.Base64
-
+  console.log("inputText "+inputText);
+  inputText = InputEvent.InputText + inputText;
   sendbas64String(videoPlayer, inputText);
-  // var binary_string = window.atob(inputText);
-  // var len = binary_string.length;
-  // var bytes = new Uint8Array(len);
-
-  // for (var i = 0; i < len; i++) {
-  //     bytes[i] = binary_string.charCodeAt(i);
-  // }
-
-  // console.log("bytes.buffer " ,bytes.buffer)
-  // videoPlayer && videoPlayer.sendMsg(bytes.buffer);
- // return bytes.buffer;
-
+}
+export function sendEnvChangeId(videoPlayer, inputText) {
+  console.log("inputText "+inputText);
+  inputText = InputEvent.EnvId + inputText;
+  sendbas64String(videoPlayer, inputText);
 }
 function sendbas64String(videoPlayer , inputText){
-  inputText = InputEvent.InputText + inputText;
   var length = inputText.length;
   var remainder = length % 4;
   var modulo ;

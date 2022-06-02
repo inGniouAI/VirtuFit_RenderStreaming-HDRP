@@ -91,7 +91,7 @@ public class GameManager : GenericSingleton<GameManager>
 #endregion
 
 #region Public Functions
-    public void UpdateGameState(GameState newGameState)
+    public void UpdateGameState(GameState newGameState, int id = 0)
     {
         newGameState = GlobalGameState;
 
@@ -101,7 +101,7 @@ public class GameManager : GenericSingleton<GameManager>
                 SceneManager.LoadScene("VirtuFit");
                 break;
             case GameState.Simulation:
-                SceneManager.LoadScene("Ballroom");
+                SceneManager.LoadScene("Ballroom"+id.ToString());
                 UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
                 break;
         }

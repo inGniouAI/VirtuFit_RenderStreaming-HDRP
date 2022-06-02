@@ -1,8 +1,10 @@
 import * as Config from "./config.js";
 import { VirtualFitReceiver } from "./virtufit.js";
-import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent, sendInputTextEvent } from "./register-events.js";
+import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent, sendInputTextEvent , sendEnvChangeId} from "./register-events.js";
 import { getServerConfig } from "./config.js";
 var AvtarCodeVal;
+var InputSettings;
+
 OnLoad();
 setup();
 
@@ -70,19 +72,19 @@ function onClickPlayButton() {
 
   setupVideoPlayer(elementVideo).then(value => virtuFitReceiver = value);
 // add inputtext
-const elementinputText = document.createElement('INPUT');
-elementinputText.id = "SKUInputText";
-elementinputText.innerHTML = "SKU";
-playerDiv.appendChild(elementinputText);
+// const elementinputText = document.createElement('INPUT');
+// elementinputText.id = "SKUInputText";
+// elementinputText.innerHTML = "SKU";
+// playerDiv.appendChild(elementinputText);
 
 
 // add Start button
 const elementStartButton = document.createElement('button');
 elementStartButton.id = "startButton";
-elementStartButton.innerHTML = "Start";
+elementStartButton.innerHTML = "Settings";
 playerDiv.appendChild(elementStartButton);
 elementStartButton.addEventListener("click", function () {
-  sendClickEvent(virtuFitReceiver, 1);
+   openNav();
 });
 
 // add SKU button
@@ -94,6 +96,29 @@ elementSKUButton.addEventListener("click", function () {
   sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
  // openNav();
 });
+
+const elementEnv1 = document.getElementById("Env0");
+const elementEnv2 = document.getElementById("Env1");
+
+elementEnv1.addEventListener("click", function () {
+  sendEnvChangeId(virtuFitReceiver, "0");
+});
+elementEnv2.addEventListener("click", function () {
+  sendEnvChangeId(virtuFitReceiver, "1");
+});
+// for(let i =0; i<4;i++){
+//   const Env = document.createElement('button');
+//   Env.id = "Env"+i;
+//   Env.innerHTML = "Env"+i;
+//   elementcrollmenu.appendChild(elementcrollmenu);
+//   InputSettings = "7"+i;
+//   Env.addEventListener("click", function () {
+//     sendInputTextEvent(virtuFitReceiver, InputSettings);
+//    // openNav();
+//   });
+// }
+
+
 
   // add fullscreen button
   const elementFullscreenButton = document.createElement('img');

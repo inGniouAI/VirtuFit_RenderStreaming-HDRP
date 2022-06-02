@@ -15,19 +15,12 @@ public class VirtuFit : GenericSingleton<VirtuFit>
     private bool animate = true;
 
     public Avatar animationRig;
-
+    public AccessoriesData AccessoriesData;
     public GameObject GetPresetOfType(AvatarType type_)
     {
         return avatarPresets.Find((x) => x.type == type_).preset;
     }
 
-    private void Start()
-    {
-        // GameManager.Instance.UpdateAvatarCode();    
-        // ImportGLBAsync(GameManager.Instance.AvatarDirectory);
-        // GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
-
-    }
 
     #region GLTF Model Loading
 
@@ -60,14 +53,14 @@ public class VirtuFit : GenericSingleton<VirtuFit>
             ClothCopy(GameManager.Instance.MyTwin.transform);
         }
     }
-
+    ModelData mData;
     void SkinMeshTransfer(Transform Target, string apparel)
     {
         GameObject avatarOld = GetPresetOfType(GameManager.Instance.GlobalAvatarType);
         Transform[] allGameobjects = avatarOld.GetComponentsInChildren<Transform>();
         Transform[] allGameobjectsNew = Target.GetComponentsInChildren<Transform>();
 
-        ModelData mData = avatarOld.GetComponent<ModelData>();
+         mData = avatarOld.GetComponent<ModelData>();
 
         foreach (var source in allGameobjects)
         {
@@ -195,4 +188,27 @@ public class VirtuFit : GenericSingleton<VirtuFit>
         if (AvatarType.ExtraLarge == GameManager.Instance.GlobalAvatarType)
             anim.runtimeAnimatorController = Resources.Load("Animation/Virtufit_XL") as RuntimeAnimatorController;
     }
+
+    // Change accessoriies
+GameObject necklace;
+GameObject Bangles1;
+GameObject Bangles2;
+
+    public void ChangeNeckLace(int id){
+        if(necklace!=null){
+            Destroy(necklace);
+        }
+        necklace = Instantiate(AccessoriesData.NecklaceList[0],mData.Neck);
+    } 
+    public void ChangeBangles(int id){
+        if(Bangles1!=null){
+            Destroy(Bangles1);
+        }
+         if(Bangles2!=null){
+            Destroy(Bangles2);
+        }
+        Bangles1 = Instantiate(AccessoriesData.BanglesList[0],mData.LeftWrist);
+        Bangles2 = Instantiate(AccessoriesData.BanglesList[0],mData.RightWrist);
+
+    } 
 }

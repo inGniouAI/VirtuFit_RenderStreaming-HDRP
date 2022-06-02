@@ -475,6 +475,9 @@ MonoBehaviour:
   - {fileID: 8804614741339236798}
   - {fileID: 8059723440050803466}
   skeletonRoot: {fileID: 7705878328789509222}
+  Neck: {fileID: 4488882426603653141}
+  LeftWrist: {fileID: 204773785097595103}
+  RightWrist: {fileID: 2527457155601875547}
 --- !u!1 &1861558568369000143
 GameObject:
   m_ObjectHideFlags: 0

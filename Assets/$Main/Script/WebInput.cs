@@ -30,9 +30,13 @@ public class WebInput : WebBrowserInputChannelReceiver
     enum EventType
     {
         stringinput = 6,
+        EnvironmentInput = 7,
+        NecklaceInput = 8,
+        BanglesInput = 9,
+
     }
     int inputtextenum;
-
+    int inputId = 0;
         public void VirtuFitProcessInput(byte[] bytes){
              
             if (bytes == null)
@@ -42,22 +46,52 @@ public class WebInput : WebBrowserInputChannelReceiver
 
             string str = Convert.ToBase64String(bytes);
             Int32.TryParse(str[0].ToString(),out inputtextenum);
-                  
+            string trimString;   
              switch ((EventType)inputtextenum)
             {
                 case EventType.stringinput:
-                Debug.Log("match 6 = "+str[0]);
-                str = str.Remove(0,1);
-                Debug.Log("UpdateAvatarCode = "+str);
-                string trimString = str;
-
-                trimString = str.Replace("/","");
-                Debug.Log("trimString = "+trimString);
-
-                GameManager.Instance.UpdateAvatarCode(trimString);    
-                VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+                    Debug.Log("match 6 = "+str[0]);
+                    str = str.Remove(0,1);
+                    Debug.Log("UpdateAvatarCode = "+str);
+                    trimString = str;
+                    trimString = str.Replace("/","");
+                    Debug.Log("trimString = "+trimString);
+                    GameManager.Instance.UpdateAvatarCode(trimString);    
+                    VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
                break;
+
+                case EventType.EnvironmentInput:
+                    Debug.Log("match 7 = "+str[0]);
+                    str = str.Remove(0,1);
+                    Debug.Log("EnvironmentInput id = "+str);
+                    trimString = str;
+                    trimString = str.Replace("/","");
+                    Debug.Log("trimString = "+trimString);
+                    int.TryParse(trimString,out inputId);
+                    GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation,inputId);
+                break;
             
+                case EventType.NecklaceInput:
+                    Debug.Log("match 8 = "+str[0]);
+                    str = str.Remove(0,1);
+                    Debug.Log("EnvironmentInput id = "+str);
+                    trimString = str;
+                    trimString = str.Replace("/","");
+                    Debug.Log("trimString = "+trimString);
+                    int.TryParse(trimString,out inputId);
+                    VirtuFit.Instance.ChangeNeckLace(inputId);
+               break;
+                case EventType.BanglesInput:
+                    Debug.Log("match 9 = "+str[0]);
+                    str = str.Remove(0,1);
+                    Debug.Log("EnvironmentInput id = "+str);
+                    trimString = str;
+                    trimString = str.Replace("/","");
+                    Debug.Log("trimString = "+trimString);
+                    int.TryParse(trimString,out inputId);
+                    VirtuFit.Instance.ChangeBangles(inputId);
+               break;
+
             }
            }
 
