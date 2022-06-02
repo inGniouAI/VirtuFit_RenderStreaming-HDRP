@@ -29,6 +29,9 @@ public class VirtuFit : GenericSingleton<VirtuFit>
 
     public void ImportGLBAsync(string filepath)
     {
+        if(myTwin!=null)
+            return;
+
         Importer.ImportGLBAsync(filepath, new ImportSettings(), OnFinishAsync);
     }
     private void OnFinishAsync(GameObject result, AnimationClip[] clips)
