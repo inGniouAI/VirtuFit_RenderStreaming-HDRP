@@ -1,6 +1,6 @@
 import * as Config from "./config.js";
 import { VirtualFitReceiver } from "./virtufit.js";
-import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent, sendInputTextEvent , sendEnvChangeId} from "./register-events.js";
+import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent, sendInputTextEvent , sendEnvChangeId, sendNecklaceChangeId, sendBanglesChangeId} from "./register-events.js";
 import { getServerConfig } from "./config.js";
 var AvtarCodeVal;
 var InputSettings;
@@ -105,6 +105,15 @@ elementEnv1.addEventListener("click", function () {
 });
 elementEnv2.addEventListener("click", function () {
   sendEnvChangeId(virtuFitReceiver, "1");
+});
+const elementneck1 = document.getElementById("Neck0");
+const elementneck2 = document.getElementById("Neck1");
+
+elementneck1.addEventListener("click", function () {
+  sendNecklaceChangeId(virtuFitReceiver, "0");
+});
+elementneck2.addEventListener("click", function () {
+  sendNecklaceChangeId(virtuFitReceiver, "1");
 });
 // for(let i =0; i<4;i++){
 //   const Env = document.createElement('button');

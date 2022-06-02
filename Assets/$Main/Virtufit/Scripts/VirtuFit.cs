@@ -198,7 +198,7 @@ GameObject Bangles2;
         if(necklace!=null){
             Destroy(necklace);
         }
-        necklace = Instantiate(AccessoriesData.NecklaceList[0],mData.Neck);
+        necklace = Instantiate(AccessoriesData.NecklaceList[id],mData.Neck);
     } 
     public void ChangeBangles(int id){
         if(Bangles1!=null){
@@ -207,8 +207,8 @@ GameObject Bangles2;
          if(Bangles2!=null){
             Destroy(Bangles2);
         }
-        Bangles1 = Instantiate(AccessoriesData.BanglesList[0],mData.LeftWrist);
-        Bangles2 = Instantiate(AccessoriesData.BanglesList[0],mData.RightWrist);
+        Bangles1 = Instantiate(AccessoriesData.BanglesList[id],mData.LeftWrist);
+        Bangles2 = Instantiate(AccessoriesData.BanglesList[id],mData.RightWrist);
 
     } 
 }

@@ -321,6 +321,16 @@ export function sendEnvChangeId(videoPlayer, inputText) {
   inputText = InputEvent.EnvId + inputText;
   sendbas64String(videoPlayer, inputText);
 }
+export function sendNecklaceChangeId(videoPlayer, inputText) {
+  console.log("inputText "+inputText);
+  inputText = InputEvent.NecklaceId + inputText;
+  sendbas64String(videoPlayer, inputText);
+}
+export function sendBanglesChangeId(videoPlayer, inputText) {
+  console.log("inputText "+inputText);
+  inputText = InputEvent.Bangles + inputText;
+  sendbas64String(videoPlayer, inputText);
+}
 function sendbas64String(videoPlayer , inputText){
   var length = inputText.length;
   var remainder = length % 4;
