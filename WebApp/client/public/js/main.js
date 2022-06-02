@@ -102,27 +102,33 @@ const elementEnv1 = document.getElementById("Env1");
 
 elementEnv0.addEventListener("click", function () {
   sendEnvChangeId(virtuFitReceiver, "0");
+  closeNav();
 });
 elementEnv1.addEventListener("click", function () {
   sendEnvChangeId(virtuFitReceiver, "1");
+  closeNav();
 });
 const elementneck0 = document.getElementById("Neck0");
 const elementneck1 = document.getElementById("Neck1");
 
 elementneck0.addEventListener("click", function () {
   sendNecklaceChangeId(virtuFitReceiver, "0");
+  closeNav();
 });
 elementneck1.addEventListener("click", function () {
   sendNecklaceChangeId(virtuFitReceiver, "1");
+  closeNav();
 });
 const elementBangle0 = document.getElementById("Bangle0");
 const elementBangle1 = document.getElementById("Bangle1");
 
 elementBangle0.addEventListener("click", function () {
   sendBanglesChangeId(virtuFitReceiver, "0");
+  closeNav();
 });
 elementBangle1.addEventListener("click", function () {
   sendBanglesChangeId(virtuFitReceiver, "1");
+  closeNav();
 });
 // for(let i =0; i<4;i++){
 //   const Env = document.createElement('button');
