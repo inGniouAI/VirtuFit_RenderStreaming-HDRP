@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BanglesList:
   - {fileID: 9202931084599227507, guid: 878dd78857b7e40848f37c986bf183b4, type: 3}
+  - {fileID: 9202931084599227507, guid: 878dd78857b7e40848f37c986bf183b4, type: 3}
   NecklaceList:
+  - {fileID: 8064751350167075233, guid: c695d5408194b4182a349f87e346a701, type: 3}
   - {fileID: 8064751350167075233, guid: c695d5408194b4182a349f87e346a701, type: 3}

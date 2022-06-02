@@ -21,6 +21,9 @@ public class VirtuFit : GenericSingleton<VirtuFit>
         return avatarPresets.Find((x) => x.type == type_).preset;
     }
 
+    private Transform ParentOfNecklace;
+    private Transform ParentOfLBangle;
+    private Transform ParentOfRBangle;
 
     #region GLTF Model Loading
 
@@ -125,6 +128,14 @@ public class VirtuFit : GenericSingleton<VirtuFit>
             }
             foreach (var destination in allGameobjectsNew)
             {
+                if(ParentOfNecklace == null && destination.gameObject.name.Equals("Neck")){
+                    ParentOfNecklace = destination.gameObject.transform;
+                }else  if(ParentOfLBangle == null && destination.gameObject.name.Equals("L_Wrist")){
+                    ParentOfLBangle = destination.gameObject.transform;
+                }else  if(ParentOfRBangle == null && destination.gameObject.name.Equals("R_Wrist")){
+                    ParentOfRBangle = destination.gameObject.transform;
+                }
+
                 if (copyGameObject && destination.gameObject.name.Equals("Pelvis"))
                 {
                     switch (source.gameObject.name)
@@ -198,7 +209,7 @@ GameObject Bangles2;
         if(necklace!=null){
             Destroy(necklace);
         }
-        necklace = Instantiate(AccessoriesData.NecklaceList[id],mData.Neck);
+        necklace = Instantiate(AccessoriesData.NecklaceList[id],ParentOfNecklace);
     } 
     public void ChangeBangles(int id){
         if(Bangles1!=null){
@@ -207,8 +218,8 @@ GameObject Bangles2;
          if(Bangles2!=null){
             Destroy(Bangles2);
         }
-        Bangles1 = Instantiate(AccessoriesData.BanglesList[id],mData.LeftWrist);
-        Bangles2 = Instantiate(AccessoriesData.BanglesList[id],mData.RightWrist);
+        Bangles1 = Instantiate(AccessoriesData.BanglesList[id],ParentOfLBangle);
+        Bangles2 = Instantiate(AccessoriesData.BanglesList[id],ParentOfRBangle);
 
     } 
 }

@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ballroom/Ballroom0.unity
     guid: 933ddfd13a005d7449d20d3073f98699
+  - enabled: 1
+    path: Assets/Scenes/Ballroom/Ballroom1.unity
+    guid: a185995049aff4a1fbdf608c0715a27a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f939568a6bcbd480489c1c292595d69d, type: 2}

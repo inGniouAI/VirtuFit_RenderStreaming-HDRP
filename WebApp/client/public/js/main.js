@@ -97,23 +97,32 @@ elementSKUButton.addEventListener("click", function () {
  // openNav();
 });
 
-const elementEnv1 = document.getElementById("Env0");
-const elementEnv2 = document.getElementById("Env1");
+const elementEnv0 = document.getElementById("Env0");
+const elementEnv1 = document.getElementById("Env1");
 
-elementEnv1.addEventListener("click", function () {
+elementEnv0.addEventListener("click", function () {
   sendEnvChangeId(virtuFitReceiver, "0");
 });
-elementEnv2.addEventListener("click", function () {
+elementEnv1.addEventListener("click", function () {
   sendEnvChangeId(virtuFitReceiver, "1");
 });
-const elementneck1 = document.getElementById("Neck0");
-const elementneck2 = document.getElementById("Neck1");
+const elementneck0 = document.getElementById("Neck0");
+const elementneck1 = document.getElementById("Neck1");
 
-elementneck1.addEventListener("click", function () {
+elementneck0.addEventListener("click", function () {
   sendNecklaceChangeId(virtuFitReceiver, "0");
 });
-elementneck2.addEventListener("click", function () {
+elementneck1.addEventListener("click", function () {
   sendNecklaceChangeId(virtuFitReceiver, "1");
+});
+const elementBangle0 = document.getElementById("Bangle0");
+const elementBangle1 = document.getElementById("Bangle1");
+
+elementBangle0.addEventListener("click", function () {
+  sendBanglesChangeId(virtuFitReceiver, "0");
+});
+elementBangle1.addEventListener("click", function () {
+  sendBanglesChangeId(virtuFitReceiver, "1");
 });
 // for(let i =0; i<4;i++){
 //   const Env = document.createElement('button');
