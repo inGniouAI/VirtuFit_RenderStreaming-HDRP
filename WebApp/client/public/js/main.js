@@ -202,11 +202,13 @@ function onDisconnect() {
 }
 function onConnect() {
   console.log("onConnect called");
-  sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
+  setTimeout(function(){
+    sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
+  }, 1000); 
   console.log("AvtarCodeVal "+AvtarCodeVal);
-
  
 }
+
 function clearChildren(element) {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
