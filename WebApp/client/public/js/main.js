@@ -96,53 +96,50 @@ elementSKUButton.addEventListener("click", function () {
   sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
  // openNav();
 });
+// create Env buttons
+const elementScrollEnv = document.getElementById('ScrollEnv');
 
-const elementEnv0 = document.getElementById("Env0");
-const elementEnv1 = document.getElementById("Env1");
+for(let i =0; i<2;i++){
+  const Env = document.createElement('button');
+  Env.id = "Env"+i;
+  Env.innerHTML = "Env"+i;
+  elementScrollEnv.appendChild(Env);
+  InputSettings = i;
+  Env.addEventListener("click", function () {
+    sendEnvChangeId(virtuFitReceiver, InputSettings);
+    closeNav();
+  });
+}
+// create Necklace buttons
 
-elementEnv0.addEventListener("click", function () {
-  sendEnvChangeId(virtuFitReceiver, "0");
-  closeNav();
-});
-elementEnv1.addEventListener("click", function () {
-  sendEnvChangeId(virtuFitReceiver, "1");
-  closeNav();
-});
-const elementneck0 = document.getElementById("Neck0");
-const elementneck1 = document.getElementById("Neck1");
+const elementScrollNecklace = document.getElementById('ScrollNecklace');
 
-elementneck0.addEventListener("click", function () {
-  sendNecklaceChangeId(virtuFitReceiver, "0");
-  closeNav();
-});
-elementneck1.addEventListener("click", function () {
-  sendNecklaceChangeId(virtuFitReceiver, "1");
-  closeNav();
-});
-const elementBangle0 = document.getElementById("Bangle0");
-const elementBangle1 = document.getElementById("Bangle1");
+for(let i =0; i<2;i++){
+  const Necklace = document.createElement('button');
+  Necklace.id = "Neck"+i;
+  Necklace.innerHTML = "Neck"+i;
+  elementScrollNecklace.appendChild(Necklace);
+  InputSettings = i;
+  Necklace.addEventListener("click", function () {
+    sendNecklaceChangeId(virtuFitReceiver, InputSettings);
+    closeNav();
+  });
+}
+// create bangle buttons
 
-elementBangle0.addEventListener("click", function () {
-  sendBanglesChangeId(virtuFitReceiver, "0");
-  closeNav();
-});
-elementBangle1.addEventListener("click", function () {
-  sendBanglesChangeId(virtuFitReceiver, "1");
-  closeNav();
-});
-// for(let i =0; i<4;i++){
-//   const Env = document.createElement('button');
-//   Env.id = "Env"+i;
-//   Env.innerHTML = "Env"+i;
-//   elementcrollmenu.appendChild(elementcrollmenu);
-//   InputSettings = "7"+i;
-//   Env.addEventListener("click", function () {
-//     sendInputTextEvent(virtuFitReceiver, InputSettings);
-//    // openNav();
-//   });
-// }
+const elementScrollBangle = document.getElementById('ScrollBangle');
 
-
+for(let i =0; i<2;i++){
+  const Bangle = document.createElement('button');
+  Bangle.id = "Bangle"+i;
+  Bangle.innerHTML = "Bangle"+i;
+  elementScrollBangle.appendChild(Bangle);
+  InputSettings = i;
+  Bangle.addEventListener("click", function () {
+    sendBanglesChangeId(virtuFitReceiver, InputSettings);
+    closeNav();
+  });
+}
 
   // add fullscreen button
   const elementFullscreenButton = document.createElement('img');
