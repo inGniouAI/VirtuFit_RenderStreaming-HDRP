@@ -39,6 +39,7 @@ public class GameManager : GenericSingleton<GameManager>
      public UnityEvent ModelLoadedEvent;
    public override void Awake()
     {
+        Application.targetFrameRate = 30;
         base.Awake();
         if(isRunFromCmd){
             return;
