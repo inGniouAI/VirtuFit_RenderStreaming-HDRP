@@ -54,9 +54,12 @@ public class WebInput : WebBrowserInputChannelReceiver
                     str = str.Remove(0,1);
                     Debug.Log("UpdateAvatarCode = "+str);
                     trimString = str;
-                    trimString = str.Replace("/","");
-                    Debug.Log("trimString = "+trimString);
-                    GameManager.Instance.UpdateAvatarCode(trimString);    
+                    string[] subs = str.Split('/');
+                foreach (var sub in subs)
+                {
+                     Debug.Log("Substring: {sub}"+sub);
+                }
+                    GameManager.Instance.UpdateAvatarCode(subs[0],subs[1]);    
                     VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
                break;
 
@@ -74,7 +77,7 @@ public class WebInput : WebBrowserInputChannelReceiver
                 case EventType.NecklaceInput:
                     Debug.Log("match 8 = "+str[0]);
                     str = str.Remove(0,1);
-                    Debug.Log("EnvironmentInput id = "+str);
+                    Debug.Log("NecklaceInput id = "+str);
                     trimString = str;
                     trimString = str.Replace("/","");
                     Debug.Log("trimString = "+trimString);
@@ -84,7 +87,7 @@ public class WebInput : WebBrowserInputChannelReceiver
                 case EventType.BanglesInput:
                     Debug.Log("match 9 = "+str[0]);
                     str = str.Remove(0,1);
-                    Debug.Log("EnvironmentInput id = "+str);
+                    Debug.Log("BanglesInput id = "+str);
                     trimString = str;
                     trimString = str.Replace("/","");
                     Debug.Log("trimString = "+trimString);

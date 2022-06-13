@@ -184,14 +184,18 @@ public class GameManager : GenericSingleton<GameManager>
 
         }
     }
-    public void UpdateAvatarCode(string NewAvatarCode = null)
+    public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)
     {
-        if(NewAvatarCode == null){
+        if(aNewAvatarCode == null){
            AvatarCode = DefaultAvatarCode; 
         }else{
-            AvatarCode = NewAvatarCode;
+            AvatarCode = aNewAvatarCode;
         }
-      
+      if(aSku == null){
+           TextureID = "144"; 
+        }else{
+            TextureID = aSku;
+        }
         UpdateAvatarDirectory();
     }
 
