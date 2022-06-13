@@ -106,7 +106,7 @@ for(let i =0; i<2;i++){
   elementScrollEnv.appendChild(Env);
   InputSettings = i;
   Env.addEventListener("click", function () {
-    sendEnvChangeId(virtuFitReceiver, InputSettings);
+    sendEnvChangeId(virtuFitReceiver, i);
     closeNav();
   });
 }
@@ -121,7 +121,7 @@ for(let i =0; i<2;i++){
   elementScrollNecklace.appendChild(Necklace);
   InputSettings = i;
   Necklace.addEventListener("click", function () {
-    sendNecklaceChangeId(virtuFitReceiver, InputSettings);
+    sendNecklaceChangeId(virtuFitReceiver, i);
     closeNav();
   });
 }
@@ -136,7 +136,7 @@ for(let i =0; i<2;i++){
   elementScrollBangle.appendChild(Bangle);
   InputSettings = i;
   Bangle.addEventListener("click", function () {
-    sendBanglesChangeId(virtuFitReceiver, InputSettings);
+    sendBanglesChangeId(virtuFitReceiver, i);
     closeNav();
   });
 }
@@ -243,7 +243,8 @@ function openNav() {
             val1 += "<b>AvatarCode:</b> " + queryString["AvatarCode"] + "<br> <b>Sku:</b> " + queryString["Sku"];
             document.getElementById("lblredirect").innerHTML = val1; 
   
-            var val = queryString["AvatarCode"];
+            var val = queryString["AvatarCode"] +"/"+ queryString["Sku"];
+
             AvtarCodeVal = val;
          
   

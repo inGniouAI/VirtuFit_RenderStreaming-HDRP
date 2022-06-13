@@ -313,22 +313,22 @@ export function sendClickEvent(videoPlayer, elementId) {
 
 export function sendInputTextEvent(videoPlayer, inputText) {
   console.log("inputText "+inputText);
-  inputText = InputEvent.InputText + inputText;
+  inputText = InputEvent.InputText + inputText.toString();;
   sendbas64String(videoPlayer, inputText);
 }
 export function sendEnvChangeId(videoPlayer, inputText) {
   console.log("inputText "+inputText);
-  inputText = InputEvent.EnvId + inputText;
+  inputText = InputEvent.EnvId + inputText.toString();;
   sendbas64String(videoPlayer, inputText);
 }
 export function sendNecklaceChangeId(videoPlayer, inputText) {
   console.log("inputText "+inputText);
-  inputText = InputEvent.NecklaceId + inputText;
+  inputText = InputEvent.NecklaceId + inputText.toString();;
   sendbas64String(videoPlayer, inputText);
 }
 export function sendBanglesChangeId(videoPlayer, inputText) {
   console.log("inputText "+inputText);
-  inputText = InputEvent.Bangles + inputText;
+  inputText = InputEvent.Bangles + inputText.toString();
   sendbas64String(videoPlayer, inputText);
 }
 function sendbas64String(videoPlayer , inputText){
