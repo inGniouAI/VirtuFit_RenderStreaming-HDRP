@@ -33,24 +33,6 @@
         function closeNav() {
   document.getElementById("myNav").style.width = "0%";
   }
-        var queryString = new Array();
-        window.onload = function () {
-            if (queryString.length == 0) {
-                if (window.location.search.split('?').length > 1) {
-                    var params = window.location.search.split('?')[1].split('&');
-                    for (var i = 0; i < params.length; i++) {
-                        var key = params[i].split('=')[0];
-                        var value = decodeURIComponent(params[i].split('=')[1]);
-                        queryString[key] = value;
-                    }
-                }
-            }
-            if (queryString["AvatarCode"] != null && queryString["Sku"] != null) {
-                var val = "<h3>After taking multiple parameters from the previous page, we have the following information that you need:</h3><br /><br />";
-                val += "<b>AvatarCode:</b> " + queryString["AvatarCode"] + "<br> <b>Sku:</b> " + queryString["Sku"];
-                document.getElementById("lblredirect").innerHTML = val;
-            }
-        };
     </script>
 
   <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
