@@ -50,14 +50,15 @@ public class WebInput : WebBrowserInputChannelReceiver
              switch ((EventType)inputtextenum)
             {
                 case EventType.stringinput:
-                    Debug.Log("match 6 = "+str[0]);
+                    Debug.Log("match 6 = "+ $"{str[0]}");
                     str = str.Remove(0,1);
-                    Debug.Log("UpdateAvatarCode = "+str);
+                    Debug.Log("UpdateAvatarCode = "+ $"{str}");
                     trimString = str;
+                    Debug.Log($"{str}");
                     string[] subs = str.Split('/');
                 foreach (var sub in subs)
                 {
-                     Debug.Log("Substring: {sub}"+sub);
+                     Debug.Log("Substring:"+$"{sub}");
                 }
                     GameManager.Instance.UpdateAvatarCode(subs[0],subs[1]);    
                     VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
