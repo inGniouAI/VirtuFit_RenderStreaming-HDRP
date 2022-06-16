@@ -135,14 +135,14 @@ public class GameManager : GenericSingleton<GameManager>
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
 
         texture2D_.LoadImage(bytes);
-        material_.SetTexture("_BaseColorMap", texture2D_);
+        material_.SetTexture("BaseMap", texture2D_);
         Debug.Log(texture2D_);
 
-        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_normal.png");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("_NormalMap", texture2D_);
+        //bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_normal.png");
+        //texture2D_ = new Texture2D(2, 2);
+        //texture2D_.hideFlags = HideFlags.HideAndDontSave;
+        //texture2D_.LoadImage(bytes);
+        //material_.SetTexture("NormalMap", texture2D_);
 
     }
     public void UpdateAvatarDirectory()

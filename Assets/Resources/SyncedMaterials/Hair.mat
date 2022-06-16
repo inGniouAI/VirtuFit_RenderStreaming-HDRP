@@ -8,22 +8,32 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hair
-  m_Shader: {fileID: -6465566751694194690, guid: 384d88ff5b296a44b89f1fb2d4442c01, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
-    _SURFACE_TYPE_TRANSPARENT _TRANSPARENT_WRITES_MOTION_VEC
+  m_Shader: {fileID: -6465566751694194690, guid: 2344b877a22e8b04f9d05df1073cda7d, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2750
+  m_CustomRenderQueue: 2475
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_11cb7e66bf99403d894e570e34616e90:
+        m_Texture: {fileID: 2800000, guid: 6ccead89cccc47a43bd5b6904a0a2fef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_3166caef6f2640a4a56622a583f43b45:
+        m_Texture: {fileID: 2800000, guid: 6f0f16ca49070524fbe871111d564d55, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a5de1c4bf47c4d5ea50dc3d33111f342:
         m_Texture: {fileID: 2800000, guid: 6f0f16ca49070524fbe871111d564d55, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -35,8 +45,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: e0693883a517b4340b859402e6e3e2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_bdad9dd1bf9849a99f3df39bdd2ae1a2:
+        m_Texture: {fileID: 2800000, guid: ab7b2823115eaa44aad51c693f3f39ee, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_f53e922c661d42148fb27cdf16089989:
         m_Texture: {fileID: 2800000, guid: ab7b2823115eaa44aad51c693f3f39ee, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_fe3f501e7a6842d98658b66e1118fef5:
+        m_Texture: {fileID: 2800000, guid: e0693883a517b4340b859402e6e3e2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
@@ -91,6 +109,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_709b186d0023424eabf3c771abf58440_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_772f8e951fd942b3b0824485986e467e_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a4677653794245bdb001ff9698340424_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_cee590ca10534372956a4c3493e43ea2_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SmoothnessMask:
         m_Texture: {fileID: 2800000, guid: 6ccead89cccc47a43bd5b6904a0a2fef, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -112,13 +146,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_3da001310daf4b3b83bdf85c402841ec: 0
+    - Vector1_4e4caf3359c44a4ea210da7d10f10739: 0
+    - Vector1_e441788f60564e18ae5bbc3598904c41: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 1
     - _AlphaClipThreshold: 0
     - _AlphaClipThresholdDepthPostpass: 0.6
     - _AlphaClipThresholdDepthPrepass: 0.9
     - _AlphaCutoffEnable: 1
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _AlphaThresholdShadow: 0.5
     - _AlphaToMask: 0
@@ -130,14 +167,14 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 0
     - _CullMode: 0
-    - _CullModeForward: 2
+    - _CullModeForward: 0
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 0
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _EnvironmentReflections: 1
@@ -155,7 +192,7 @@ Material:
     - _ReceiveShadows: 1
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
-    - _RenderQueueType: 3
+    - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SecondarySpecular: 1
     - _SecondarySpecularShift: 0.9
@@ -171,10 +208,10 @@ Material:
     - _SpecularShift: 0.5
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 0
+    - _StencilRefDepth: 8
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 2
-    - _StencilRefMV: 32
+    - _StencilRefGBuffer: 10
+    - _StencilRefMV: 40
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
@@ -182,7 +219,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
     - _Surface: 0
-    - _SurfaceType: 1
+    - _SurfaceType: 0
     - _TransmissionRim: 0.2
     - _TransparentBackfaceEnable: 1
     - _TransparentCullMode: 2
@@ -193,10 +230,10 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 1
     - _WorkflowMode: 0
-    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
