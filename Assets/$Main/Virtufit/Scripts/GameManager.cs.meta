@@ -3,7 +3,15 @@ guid: 52976f9e9e8657342ab63070413f0cab
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - RenderStreamCam: {instanceID: 0}
+  - UnstitchedObj: {instanceID: 0}
+  - Unstitched_CholiMat: {fileID: 2100000, guid: 59c770ac3e64b10459923d455c1da342, type: 2}
+  - StitchedObj: {instanceID: 0}
+  - Stitched_CholiMat: {fileID: 2100000, guid: 00c7549eabf0855448c5e889156f2daa, type: 2}
+  - GhaghraObj: {instanceID: 0}
+  - GhaghraMat: {fileID: 2100000, guid: 525e8306fdd8b8f4c91dbf6b88ebfeac, type: 2}
+  - MyTwin: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -135,27 +135,27 @@ public class GameManager : GenericSingleton<GameManager>
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
 
         texture2D_.LoadImage(bytes);
-        material_.SetTexture("BaseMap", texture2D_);
+        material_.SetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac", texture2D_);
         Debug.Log(texture2D_);
 
-        //bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_normal.png");
-        //texture2D_ = new Texture2D(2, 2);
-        //texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        //texture2D_.LoadImage(bytes);
-        //material_.SetTexture("NormalMap", texture2D_);
+        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_normal.png");
+        texture2D_ = new Texture2D(2, 2);
+        texture2D_.hideFlags = HideFlags.HideAndDontSave;
+        texture2D_.LoadImage(bytes);
+        material_.SetTexture("Texture2D_223d41bb0338467abb2b4c71b5026b14", texture2D_);
 
     }
     public void UpdateAvatarDirectory()
     {
         if (!string.IsNullOrEmpty(AvatarCode))
         {
-            AvatarDirectory = $"/home/reaper/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/home/reaper/Documents/VirtuFit_Root/VirtuFit_Textures";
+            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
         else
         {
-           AvatarDirectory = $"/home/reaper/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-           TextureDirectory = $"/home/reaper/Documents/VirtuFit_Root/VirtuFit_Textures";
+           AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+           TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
     }
     public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)
