@@ -177,13 +177,9 @@ public class GameManager : GenericSingleton<GameManager>
         }
         else
         {
-            Debug.LogError($"Texture ID Variable = {aSku}");
-
-            TextureID = aSku = DefaultTextureID;  //Broken Variable Causing Error Of no String Update please check aSku variable data
-
-            Debug.LogWarning("Setting Variable To Default, Textures Loaded"); //Remove Debug warning after Fix and remove the default Texture String Line
+            TextureID = aSku; 
         }
-        Debug.LogWarning($"Received {AvatarCode} & {TextureID}"); // Verifies the variable String
+        Debug.LogWarning($"Received Avatar Code : {AvatarCode} & Texture ID : {TextureID}"); // Verifies the variable String
 
         UpdateAvatarDirectory();
     }
