@@ -88,14 +88,14 @@ elementStartButton.addEventListener("click", function () {
 });
 
 // add SKU button
-const elementSKUButton = document.createElement('button');
-elementSKUButton.id = "SKUButton";
-elementSKUButton.innerHTML = "SKU";
-playerDiv.appendChild(elementSKUButton);
-elementSKUButton.addEventListener("click", function () {
-  sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
- // openNav();
-});
+// const elementSKUButton = document.createElement('button');
+// elementSKUButton.id = "SKUButton";
+// elementSKUButton.innerHTML = "SKU";
+// playerDiv.appendChild(elementSKUButton);
+// elementSKUButton.addEventListener("click", function () {
+//   sendInputTextEvent(virtuFitReceiver, AvtarCodeVal);
+//  // openNav();
+// });
 // create Env buttons
 const elementScrollEnv = document.getElementById('ScrollEnv');
 
