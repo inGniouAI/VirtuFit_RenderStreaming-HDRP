@@ -21,11 +21,16 @@ public class WebInput : WebBrowserInputChannelReceiver
             {
                 
                 channel.OnMessage += VirtuFitProcessInput;
+                channel.OnClose += CloseChannel;
                
             }
            
 
 
+    }
+    void CloseChannel(){
+        Debug.Log("Datachannel Closed");
+        GameManager.Instance.ReloadApplication();
     }
     enum EventType
     {
@@ -33,6 +38,7 @@ public class WebInput : WebBrowserInputChannelReceiver
         EnvironmentInput = 7,
         NecklaceInput = 8,
         BanglesInput = 9,
+        CloseWebapp = 10
 
     }
     int inputtextenum;
@@ -95,6 +101,12 @@ public class WebInput : WebBrowserInputChannelReceiver
                     int.TryParse(trimString,out inputId);
                     VirtuFit.Instance.ChangeBangles(inputId);
                break;
+                case EventType.CloseWebapp:
+                 Debug.Log("match 10 = "+str[0]);
+                 
+                 //restart / reload scene
+
+                break;
 
             }
            }

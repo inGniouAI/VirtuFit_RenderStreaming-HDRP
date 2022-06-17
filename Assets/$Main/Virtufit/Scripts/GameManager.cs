@@ -36,6 +36,8 @@ public class GameManager : GenericSingleton<GameManager>
 {
     [SerializeField] public Camera RenderStreamCam = null;
     [SerializeField] private bool isRunFromCmd = false;
+    [SerializeField] private GameObject DeleteObjectOnRelaod;
+
      public UnityEvent ModelLoadedEvent;
    public override void Awake()
     {
@@ -157,6 +159,10 @@ public class GameManager : GenericSingleton<GameManager>
            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
+        #if UNITY_STANDALONE_OSX
+            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Directory";
+        #endif
     }
     public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)
     {
@@ -197,5 +203,11 @@ public class GameManager : GenericSingleton<GameManager>
         {
             ModelLoadedEvent.Invoke();
         }
+    }
+    public void ReloadApplication(){
+
+        SceneManager.LoadScene("VirtuFit");
+        Destroy(MyTwin);
+        Destroy(DeleteObjectOnRelaod);
     }
 }
