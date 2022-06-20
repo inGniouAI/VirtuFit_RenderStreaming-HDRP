@@ -152,7 +152,7 @@ public class GameManager : GenericSingleton<GameManager>
         if (!string.IsNullOrEmpty(AvatarCode))
         {
             AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
+            TextureDirectory = $"/hom/archr/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
         else
         {
