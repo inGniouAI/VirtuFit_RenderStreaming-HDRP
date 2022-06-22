@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1249.82, g: 1597.4819, b: 2177.206, a: 1}
+  m_IndirectSpecularColor: {r: 1481.9102, g: 1835.9688, b: 2430.3418, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -965,6 +965,7 @@ MonoBehaviour:
   - preset: {fileID: 1212297587294639427, guid: bc51990fef9b77a4b9a94ff73830f73f, type: 3}
     type: 4
   apparelName: 
+  MyTwinSkin: {fileID: 2100000, guid: b1761acb94b30149a9576473deb1ca89, type: 2}
   animationRig: {fileID: 9000000, guid: 903fa863bff1f494c9173a23f0feb8fe, type: 3}
   AccessoriesData: {fileID: 11400000, guid: 456168ed68f654f588ce420a1f1a0fc0, type: 2}
 --- !u!4 &847398299
@@ -1460,7 +1461,7 @@ PrefabInstance:
       objectReference: {fileID: 1623734776}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingAddress
-      value: localhost:8000
+      value: localhost:8118
       objectReference: {fileID: 0}
     - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: RenderStreamCam
