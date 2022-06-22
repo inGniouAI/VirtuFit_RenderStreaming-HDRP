@@ -3,7 +3,9 @@ import Offer from './offer';
 import Answer from './answer';
 import Candidate from './candidate';
 
+
 let isPrivate: boolean;
+console.log("http handler");
 
 // [{sessonId:[connectionId,...]}]
 const clients: Map<string, Set<string>> = new Map<string, Set<string>>();
@@ -53,6 +55,8 @@ function checkSessionId(req: Request, res: Response, next): void {
 }
 
 function getConnection(req: Request, res: Response): void {
+  console.log("http getConnection");
+
   const sessionId: string = req.header('session-id');
   const arrayConnection = Array.from(clients.get(sessionId));
   const obj = arrayConnection.map((v) => ({ connectionId: v }));
@@ -101,6 +105,8 @@ function getAnswer(req: Request, res: Response): void {
 }
 
 function getCandidate(req: Request, res: Response): void {
+  console.log("http getCandidate");
+
   // get `fromtime` parameter from request query
   const fromTime: number = req.query.fromtime ? Number(req.query.fromtime) : 0;
   const sessionId: string = req.header('session-id');
@@ -144,6 +150,8 @@ function deleteSession(req: Request, res: Response): void {
 }
 
 function createConnection(req: Request, res: Response): void {
+  console.log("http createConnection");
+
   const sessionId: string = req.header('session-id');
   const { connectionId } = req.body;
   if (connectionId == null) {
@@ -177,6 +185,9 @@ function createConnection(req: Request, res: Response): void {
 }
 
 function deleteConnection(req: Request, res: Response): void {
+
+  console.log("http deleteConnection");
+
   const sessionId: string = req.header('session-id');
   const { connectionId } = req.body;
   clients.get(sessionId).delete(connectionId);

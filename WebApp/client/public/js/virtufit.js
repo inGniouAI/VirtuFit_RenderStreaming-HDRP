@@ -19,6 +19,7 @@ function isTouchDevice() {
     (navigator.msMaxTouchPoints > 0));
 }
 
+
 export class VirtualFitReceiver {
   constructor(videoElement) {
     const _this = this;
@@ -230,5 +231,6 @@ export class VirtualFitReceiver {
       this.pc = null;
     }
   }
+  
 }
 

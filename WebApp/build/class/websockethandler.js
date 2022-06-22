@@ -5,6 +5,7 @@ var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
 var isPrivate;
+console.log("WebSocket handler");
 // [{sessonId:[connectionId,...]}]
 var clients = new Map();
 // [{connectionId:[sessionId1, sessionId2]}]
@@ -23,10 +24,12 @@ function reset(mode) {
 }
 exports.reset = reset;
 function add(ws) {
+    console.log("WebSocket connection add");
     clients.set(ws, new Set());
 }
 exports.add = add;
 function remove(ws) {
+    console.log("WebSocket connection remove");
     var connectionIds = clients.get(ws);
     connectionIds.forEach(function (connectionId) {
         var pair = connectionPair.get(connectionId);
@@ -39,9 +42,13 @@ function remove(ws) {
         connectionPair.delete(connectionId);
     });
     clients.delete(ws);
+    setTimeout(function () {
+        RestartUnityApp();
+    }, 2000);
 }
 exports.remove = remove;
 function onConnect(ws, connectionId) {
+    console.log("WebSocket onConnect");
     var polite = true;
     if (isPrivate) {
         if (connectionPair.has(connectionId)) {
@@ -65,6 +72,7 @@ function onConnect(ws, connectionId) {
 }
 exports.onConnect = onConnect;
 function onDisconnect(ws, connectionId) {
+    console.log("WebSocket onDisconnect");
     var connectionIds = clients.get(ws);
     connectionIds.delete(connectionId);
     if (connectionPair.has(connectionId)) {
@@ -102,6 +110,7 @@ function onOffer(ws, message) {
 }
 exports.onOffer = onOffer;
 function onAnswer(ws, message) {
+    console.log("onAnswer called");
     var connectionId = message.connectionId;
     var connectionIds = getOrCreateConnectionIds(ws);
     connectionIds.add(connectionId);
@@ -138,3 +147,11 @@ function onCandidate(ws, message) {
     });
 }
 exports.onCandidate = onCandidate;
+var exec = require('child_process').execFile;
+var RestartUnityApp = function () {
+    console.log("fun() start");
+    exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function (err, data) {
+        console.log(err);
+        console.log(data.toString());
+    });
+};

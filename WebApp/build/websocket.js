@@ -9,8 +9,10 @@ var WSSignaling = /** @class */ (function () {
         this.wss = new websocket.Server({ server: server });
         handler.reset(mode);
         this.wss.on('connection', function (ws) {
+            console.log("connection add");
             handler.add(ws);
             ws.onclose = function () {
+                console.log("connection remove");
                 handler.remove(ws);
             };
             ws.onmessage = function (event) {
@@ -27,18 +29,23 @@ var WSSignaling = /** @class */ (function () {
                 console.log(msg);
                 switch (msg.type) {
                     case "connect":
+                        console.log("connect from websocket");
                         handler.onConnect(ws, msg.connectionId);
                         break;
                     case "disconnect":
+                        console.log("disconnect from websocket");
                         handler.onDisconnect(ws, msg.connectionId);
                         break;
                     case "offer":
+                        console.log("offer from websocket");
                         handler.onOffer(ws, msg.data);
                         break;
                     case "answer":
+                        console.log("answer from websocket");
                         handler.onAnswer(ws, msg.data);
                         break;
                     case "candidate":
+                        console.log("candidate from websocket");
                         handler.onCandidate(ws, msg.data);
                         break;
                     default:

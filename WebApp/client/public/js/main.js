@@ -191,6 +191,7 @@ async function setupVideoPlayer(elements) {
 }
 
 function onDisconnect() {
+  console.log("onDisconnect called");
   const playerDiv = document.getElementById('player');
   clearChildren(playerDiv);
   virtuFitReceiver.stop();

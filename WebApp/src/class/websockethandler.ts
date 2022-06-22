@@ -3,6 +3,7 @@ import Answer from './answer';
 import Candidate from './candidate';
 
 let isPrivate: boolean;
+console.log("WebSocket handler");
 
 // [{sessonId:[connectionId,...]}]
 const clients: Map<WebSocket, Set<string>> = new Map<WebSocket, Set<string>>();
@@ -25,10 +26,14 @@ function reset(mode: string): void {
 }
 
 function add(ws: WebSocket): void {
+  console.log("WebSocket connection add");
+
   clients.set(ws, new Set<string>());
 }
 
 function remove(ws: WebSocket): void {
+  console.log("WebSocket connection remove");
+   
   const connectionIds = clients.get(ws);
   connectionIds.forEach(connectionId => {
     const pair = connectionPair.get(connectionId);
@@ -42,9 +47,15 @@ function remove(ws: WebSocket): void {
   });
 
   clients.delete(ws);
+  setTimeout(function(){
+    RestartUnityApp();
+  }, 2000); 
+ 
+
 }
 
 function onConnect(ws: WebSocket, connectionId: string): void {
+  console.log("WebSocket onConnect");
   let polite = true;
   if (isPrivate) {
     if (connectionPair.has(connectionId)) {
@@ -68,6 +79,8 @@ function onConnect(ws: WebSocket, connectionId: string): void {
 }
 
 function onDisconnect(ws: WebSocket, connectionId: string): void {
+  console.log("WebSocket onDisconnect");
+
   const connectionIds = clients.get(ws);
   connectionIds.delete(connectionId);
 
@@ -108,6 +121,7 @@ function onOffer(ws: WebSocket, message: any): void {
 }
 
 function onAnswer(ws: WebSocket, message: any): void {
+  console.log("onAnswer called")
   const connectionId = message.connectionId as string;
   const connectionIds = getOrCreateConnectionIds(ws);
   connectionIds.add(connectionId);
@@ -148,6 +162,15 @@ function onCandidate(ws: WebSocket, message: any): void {
     }
     k.send(JSON.stringify({ from: connectionId, to: "", type: "candidate", data: candidate }));
   });
+}
+var exec = require('child_process').execFile;
+
+var RestartUnityApp =function(){
+   console.log("fun() start");
+   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
+        console.log(err)
+        console.log(data.toString());                       
+    });  
 }
 
 export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate };

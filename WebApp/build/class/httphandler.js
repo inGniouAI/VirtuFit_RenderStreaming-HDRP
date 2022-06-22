@@ -5,6 +5,7 @@ var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
 var isPrivate;
+console.log("http handler");
 // [{sessonId:[connectionId,...]}]
 var clients = new Map();
 // [{connectionId:[sessionId1, sessionId2]}]
@@ -47,6 +48,7 @@ function checkSessionId(req, res, next) {
 }
 exports.checkSessionId = checkSessionId;
 function getConnection(req, res) {
+    console.log("http getConnection");
     var sessionId = req.header('session-id');
     var arrayConnection = Array.from(clients.get(sessionId));
     var obj = arrayConnection.map(function (v) { return ({ connectionId: v }); });
@@ -92,6 +94,7 @@ function getAnswer(req, res) {
 }
 exports.getAnswer = getAnswer;
 function getCandidate(req, res) {
+    console.log("http getCandidate");
     // get `fromtime` parameter from request query
     var fromTime = req.query.fromtime ? Number(req.query.fromtime) : 0;
     var sessionId = req.header('session-id');
@@ -136,6 +139,7 @@ function deleteSession(req, res) {
 }
 exports.deleteSession = deleteSession;
 function createConnection(req, res) {
+    console.log("http createConnection");
     var sessionId = req.header('session-id');
     var connectionId = req.body.connectionId;
     if (connectionId == null) {
@@ -169,6 +173,7 @@ function createConnection(req, res) {
 }
 exports.createConnection = createConnection;
 function deleteConnection(req, res) {
+    console.log("http deleteConnection");
     var sessionId = req.header('session-id');
     var connectionId = req.body.connectionId;
     clients.get(sessionId).delete(connectionId);

@@ -15,6 +15,7 @@ export const createServer = (config: Options): express.Application => {
   if (config.logging != "none") {
     app.use(morgan(config.logging));
   }
+  console.log("Server file called");
   // const signal = require('./signaling');
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());

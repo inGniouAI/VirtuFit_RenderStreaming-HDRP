@@ -12,10 +12,13 @@ export default class WSSignaling {
     handler.reset(mode);
 
     this.wss.on('connection', (ws: WebSocket) => {
+      console.log("connection add");
 
       handler.add(ws);
 
       ws.onclose = (): void => {
+        console.log("connection remove");
+
         handler.remove(ws);
       }
 
@@ -38,18 +41,28 @@ export default class WSSignaling {
 
         switch (msg.type) {
           case "connect":
+            console.log("connect from websocket");
+
             handler.onConnect(ws, msg.connectionId);
             break;
           case "disconnect":
+            console.log("disconnect from websocket");
+
             handler.onDisconnect(ws, msg.connectionId);
             break;
           case "offer":
+            console.log("offer from websocket");
+
             handler.onOffer(ws, msg.data);
             break;
           case "answer":
+            console.log("answer from websocket");
+
             handler.onAnswer(ws, msg.data);
             break;
           case "candidate":
+            console.log("candidate from websocket");
+
             handler.onCandidate(ws, msg.data);
             break;
           default:
