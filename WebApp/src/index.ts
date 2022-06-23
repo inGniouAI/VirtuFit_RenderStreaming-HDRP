@@ -8,39 +8,7 @@ import { createServer } from './server';
 import { AddressInfo } from 'net';
 import WSSignaling from './websocket';
 import Options from './class/options';
-import { config, DynamoDB } from "aws-sdk";
-var AWS = require("aws-sdk");
-let awsConfig = {
-    "region": "ap-south-1",
-    "accessKeyId": "AKIAQUOTQMLFYPDZ2KRQ", "secretAccessKey": "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"
-};
-AWS.config.update(awsConfig);
-
-let docClient = new AWS.DynamoDB.DocumentClient();
-
-let modify = function (ipport) {
-
-    
-    var params = {
-        TableName: "ListOfInstances",
-        Key: { "Ip_port": ipport },
-        UpdateExpression: "set Instance_status = :bystatus",
-        ExpressionAttributeValues: {
-            ":bystatus": "Busy"
-        },
-        ReturnValues: "UPDATED_NEW"
-
-    };
-    docClient.update(params, function (err, data) {
-
-        if (err) {
-            console.log("users::update::error - " + JSON.stringify(err, null, 2));
-        } else {
-            console.log("users::update::success "+JSON.stringify(data) );
-        }
-    });
-}
-
+import {SetIpPort} from "./class/websockethandler";
 
 export class RenderStreaming {
   public static run(argv: string[]): RenderStreaming {
@@ -114,7 +82,7 @@ export class RenderStreaming {
 
     console.log(`start as ${this.options.mode} mode`);
      ipport = ipport + port;
-    modify(ipport);
+     SetIpPort(ipport);
   
   }
 

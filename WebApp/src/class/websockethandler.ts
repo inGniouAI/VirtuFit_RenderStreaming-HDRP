@@ -1,7 +1,37 @@
 import Offer from './offer';
 import Answer from './answer';
 import Candidate from './candidate';
+import { config, DynamoDB } from "aws-sdk";
+var AWS = require("aws-sdk");
+let awsConfig = {
+    "region": "ap-south-1",
+    "accessKeyId": "AKIAQUOTQMLFYPDZ2KRQ", "secretAccessKey": "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"
+};
+AWS.config.update(awsConfig);
 
+let docClient = new AWS.DynamoDB.DocumentClient();
+
+export function modify (ipport) {
+    
+    var params = {
+        TableName: "ListOfInstances",
+        Key: { "Ip_port": ipport },
+        UpdateExpression: "set Instance_status = :bystatus",
+        ExpressionAttributeValues: {
+            ":bystatus": "Free"
+        },
+        ReturnValues: "UPDATED_NEW"
+
+    };
+    docClient.update(params, function (err, data) {
+
+        if (err) {
+            console.log("users::update::error - " + JSON.stringify(err, null, 2));
+        } else {
+            console.log("users::update::success "+JSON.stringify(data) );
+        }
+    });
+}
 let isPrivate: boolean;
 console.log("WebSocket handler");
 
@@ -167,10 +197,14 @@ var exec = require('child_process').execFile;
 
 var RestartUnityApp =function(){
    console.log("fun() start");
-   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming',['--SignalingUrl', 'localhost:8000'] , function(err, data) {  
+   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming',['--SignalingUrl', Ipport] , function(err, data) {  
         console.log(err)
         console.log(data.toString());                       
     });  
+    modify(Ipport);
 }
-
+let Ipport;
+export function SetIpPort(ipport){
+  Ipport = ipport;
+}
 export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate };

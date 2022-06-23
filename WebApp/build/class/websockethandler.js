@@ -1,9 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = void 0;
+exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
 var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
+var AWS = require("aws-sdk");
+var awsConfig = {
+    "region": "ap-south-1",
+    "accessKeyId": "AKIAQUOTQMLFYPDZ2KRQ", "secretAccessKey": "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"
+};
+AWS.config.update(awsConfig);
+var docClient = new AWS.DynamoDB.DocumentClient();
+function modify(ipport) {
+    var params = {
+        TableName: "ListOfInstances",
+        Key: { "Ip_port": ipport },
+        UpdateExpression: "set Instance_status = :bystatus",
+        ExpressionAttributeValues: {
+            ":bystatus": "Free"
+        },
+        ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+        if (err) {
+            console.log("users::update::error - " + JSON.stringify(err, null, 2));
+        }
+        else {
+            console.log("users::update::success " + JSON.stringify(data));
+        }
+    });
+}
+exports.modify = modify;
 var isPrivate;
 console.log("WebSocket handler");
 // [{sessonId:[connectionId,...]}]
@@ -150,8 +177,14 @@ exports.onCandidate = onCandidate;
 var exec = require('child_process').execFile;
 var RestartUnityApp = function () {
     console.log("fun() start");
-    exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', ['--SignalingUrl', 'localhost:8000'], function (err, data) {
+    exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', ['--SignalingUrl', Ipport], function (err, data) {
         console.log(err);
         console.log(data.toString());
     });
+    modify(Ipport);
 };
+var Ipport;
+function SetIpPort(ipport) {
+    Ipport = ipport;
+}
+exports.SetIpPort = SetIpPort;
