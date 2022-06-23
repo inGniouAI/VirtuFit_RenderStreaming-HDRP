@@ -81,7 +81,7 @@ export class RenderStreaming {
     }
 
     console.log(`start as ${this.options.mode} mode`);
-     ipport = ipport + port;
+     ipport = ipport +":"+ port;
      SetIpPort(ipport);
   
   }

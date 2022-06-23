@@ -45,7 +45,7 @@ var RenderStreaming = /** @class */ (function () {
             new websocket_1.default(this.server, this.options.mode);
         }
         console.log("start as " + this.options.mode + " mode");
-        ipport = ipport + port;
+        ipport = ipport + ":" + port;
         websockethandler_1.SetIpPort(ipport);
     }
     RenderStreaming.run = function (argv) {

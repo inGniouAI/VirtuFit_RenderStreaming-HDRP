@@ -16,9 +16,9 @@ export function modify (ipport) {
     var params = {
         TableName: "ListOfInstances",
         Key: { "Ip_port": ipport },
-        UpdateExpression: "set Instance_status = :bystatus",
+        UpdateExpression: "set instance_status = :bystatus",
         ExpressionAttributeValues: {
-            ":bystatus": "Free"
+            ":bystatus": "Ready"
         },
         ReturnValues: "UPDATED_NEW"
 
