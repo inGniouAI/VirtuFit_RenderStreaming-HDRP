@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Hair
   m_Shader: {fileID: -6465566751694194690, guid: 2344b877a22e8b04f9d05df1073cda7d, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
+  m_ShaderKeywords: _ALPHATEST_ON _ALPHATOMASK_ON _DEPTHOFFSET_ON _DISABLE_SSR_TRANSPARENT
+    _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -146,9 +147,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_3da001310daf4b3b83bdf85c402841ec: 0
-    - Vector1_4e4caf3359c44a4ea210da7d10f10739: 0
-    - Vector1_e441788f60564e18ae5bbc3598904c41: 0
+    - Vector1_3da001310daf4b3b83bdf85c402841ec: 0.225
+    - Vector1_4e4caf3359c44a4ea210da7d10f10739: 0.225
+    - Vector1_e441788f60564e18ae5bbc3598904c41: 0.275
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 1
     - _AlphaClipThreshold: 0
@@ -158,8 +159,8 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _AlphaThresholdShadow: 0.5
-    - _AlphaToMask: 0
-    - _AlphaToMaskInspectorValue: 0
+    - _AlphaToMask: 1
+    - _AlphaToMaskInspectorValue: 1
     - _Blend: 0
     - _BlendMode: 0
     - _BumpScale: 1
@@ -169,11 +170,11 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _Cutoff: 0.5
-    - _DepthOffsetEnable: 0
+    - _DepthOffsetEnable: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 0
     - _DoubleSidedEnable: 1
-    - _DoubleSidedNormalMode: 2
+    - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
@@ -237,7 +238,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999877, g: 0.19999877, b: 0.19999877, a: 0.5}
     - _SpecularColor: {r: 0.6039216, g: 0.31372547, b: 0, a: 1}

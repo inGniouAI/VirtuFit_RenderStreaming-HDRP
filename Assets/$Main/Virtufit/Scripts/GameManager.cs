@@ -151,13 +151,13 @@ public class GameManager : GenericSingleton<GameManager>
     {
         if (!string.IsNullOrEmpty(AvatarCode))
         {
-            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/hom/archr/Documents/VirtuFit_Root/VirtuFit_Textures";
+            AvatarDirectory = $"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
         else
         {
-           AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-           TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
+           AvatarDirectory = $"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+           TextureDirectory = $"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
         #if UNITY_STANDALONE_OSX
             AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
