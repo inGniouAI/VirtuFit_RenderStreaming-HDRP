@@ -167,7 +167,7 @@ var exec = require('child_process').execFile;
 
 var RestartUnityApp =function(){
    console.log("fun() start");
-   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
+   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming',['--SignalingUrl', 'localhost:8000'] , function(err, data) {  
         console.log(err)
         console.log(data.toString());                       
     });  

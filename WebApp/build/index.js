@@ -7,6 +7,32 @@ var fs = require("fs");
 var os = require("os");
 var server_1 = require("./server");
 var websocket_1 = require("./websocket");
+var AWS = require("aws-sdk");
+var awsConfig = {
+    "region": "ap-south-1",
+    "accessKeyId": "AKIAQUOTQMLFYPDZ2KRQ", "secretAccessKey": "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"
+};
+AWS.config.update(awsConfig);
+var docClient = new AWS.DynamoDB.DocumentClient();
+var modify = function (ipport) {
+    var params = {
+        TableName: "ListOfInstances",
+        Key: { "Ip_port": ipport },
+        UpdateExpression: "set Instance_status = :bystatus",
+        ExpressionAttributeValues: {
+            ":bystatus": "Busy"
+        },
+        ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+        if (err) {
+            console.log("users::update::error - " + JSON.stringify(err, null, 2));
+        }
+        else {
+            console.log("users::update::success " + JSON.stringify(data));
+        }
+    });
+};
 var RenderStreaming = /** @class */ (function () {
     function RenderStreaming(options) {
         var _this = this;
@@ -35,12 +61,17 @@ var RenderStreaming = /** @class */ (function () {
                 }
             });
         }
+        var port = this.server.address().port;
+        var ipport;
         if (this.options.websocket) {
+            ipport = this.getIPAddress()[0];
             console.log("start websocket signaling server ws://" + this.getIPAddress()[0]);
             //Start Websocket Signaling server
             new websocket_1.default(this.server, this.options.mode);
         }
         console.log("start as " + this.options.mode + " mode");
+        ipport = ipport + port;
+        modify(ipport);
     }
     RenderStreaming.run = function (argv) {
         var program = new commander_1.Command();
