@@ -38,19 +38,19 @@ public class GameManager : GenericSingleton<GameManager>
     [SerializeField] private bool isRunFromCmd = false;
     [SerializeField] private GameObject DeleteObjectOnRelaod;
 
-     public UnityEvent ModelLoadedEvent;
-   public override void Awake()
+    public UnityEvent ModelLoadedEvent;
+    public override void Awake()
     {
         base.Awake();
-        if(isRunFromCmd){
+        if (isRunFromCmd) {
             return;
         }
     }
-#region Hidden Public Variables
+    #region Hidden Public Variables
     [HideInInspector] public string AvatarDirectory = null;
     [HideInInspector] public AvatarType GlobalAvatarType;
 
-    [HideInInspector]public string TextureDirectory = null;
+    [HideInInspector] public string TextureDirectory = null;
     [HideInInspector] public string TextureID = null;
     [HideInInspector] private string DefaultTextureID = "144";
     [HideInInspector] public GameObject UnstitchedObj;
@@ -64,15 +64,15 @@ public class GameManager : GenericSingleton<GameManager>
     [HideInInspector] public string AvatarCode = null;
     [HideInInspector] private string DefaultAvatarCode = "0001";
 
-    
+
     [HideInInspector] public GameState GlobalGameState;
     [HideInInspector] public ProductType GlobalProductType;
 
     private Texture2D Texture2D_;
     private byte[] bytes;
-#endregion
+    #endregion
 
-#region Public Functions
+    #region Public Functions
     public void UpdateGameState(GameState newGameState, int id = 0)
     {
         newGameState = GlobalGameState;
@@ -87,7 +87,7 @@ public class GameManager : GenericSingleton<GameManager>
                 UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
                 break;
         }
-#endregion
+        #endregion
     }
 
     public void UpdateAvatarType(AvatarType newAvatarType)
@@ -116,7 +116,7 @@ public class GameManager : GenericSingleton<GameManager>
         switch (newProductType)
         {
             case ProductType.StitchedCholiAndGhaghra:
-                LoadTextures(TextureID, "1_stitched", Texture2D_, Stitched_CholiMat); 
+                LoadTextures(TextureID, "1_stitched", Texture2D_, Stitched_CholiMat);
                 LoadTextures(TextureID, "2", Texture2D_, GhaghraMat);
                 StitchedObj.SetActive(true);
                 UnstitchedObj.SetActive(false);
@@ -132,7 +132,7 @@ public class GameManager : GenericSingleton<GameManager>
 
     public void LoadTextures(string code, string subCode, Texture2D texture2D_, Material material_)
     {
-        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_diffused.png"); 
+        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_diffused.png");
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
@@ -148,6 +148,7 @@ public class GameManager : GenericSingleton<GameManager>
     }
     public void UpdateAvatarDirectory()
     {
+#if UNITY_STANDALONE_LINUX
         if (!string.IsNullOrEmpty(AvatarCode))
         {
             AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
@@ -155,63 +156,81 @@ public class GameManager : GenericSingleton<GameManager>
         }
         else
         {
-           AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-           TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
+            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
+#endif
 #if UNITY_STANDALONE_OSX
-            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Directory";
+        if (!string.IsNullOrEmpty(AvatarCode))
+        {
+            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Textures";
+        }
+        else
+        {
+            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Textures";
+        }
 #endif
 #if UNITY_STANDALONE_WIN
-        AvatarDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-        TextureDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Textures";
+        if (!string.IsNullOrEmpty(AvatarCode))
+        {
+            AvatarDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Textures";
+        }
+        else
+        {
+            AvatarDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+            TextureDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Textures";
+        }
 #endif
     }
-    public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)
-    {
-        if(aNewAvatarCode == null)
-        {
-            AvatarCode = DefaultAvatarCode; 
-            Debug.LogWarning("Default Avatar Loaded");
-        }
-        else
-        {
-            AvatarCode = aNewAvatarCode;
-        }
-        if(aSku == null)
-        {
-            TextureID = DefaultTextureID;
 
-            Debug.LogWarning("Default Textures Loaded");
-        }
-        else
+        public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)
         {
-            TextureID = aSku; 
-        }
-        Debug.LogWarning($"Received Avatar Code : {AvatarCode} & Texture ID : {TextureID}"); // Verifies the variable String
+            if (aNewAvatarCode == null)
+            {
+                AvatarCode = DefaultAvatarCode;
+                Debug.LogWarning("Default Avatar Loaded");
+            }
+            else
+            {
+                AvatarCode = aNewAvatarCode;
+            }
+            if (aSku == null)
+            {
+                TextureID = DefaultTextureID;
 
-        UpdateAvatarDirectory();
+                Debug.LogWarning("Default Textures Loaded");
+            }
+            else
+            {
+                TextureID = aSku;
+            }
+            Debug.LogWarning($"Received Avatar Code : {AvatarCode} & Texture ID : {TextureID}"); // Verifies the variable String
+
+            UpdateAvatarDirectory();
+        }
+
+        public void GetReferences()
+        {
+            StitchedObj = GameObject.FindGameObjectWithTag("StitchedCholi");
+            UnstitchedObj = GameObject.FindGameObjectWithTag("UnstitchedCholi");
+            GhaghraObj = GameObject.FindGameObjectWithTag("Ghaghra");
+        }
+
+        public void InvokeModelLoadedEvent() {
+
+            if (ModelLoadedEvent != null)
+            {
+                ModelLoadedEvent.Invoke();
+            }
+        }
+
+        public void ReloadApplication()
+        {
+            SceneManager.LoadScene("VirtuFit");
+            Destroy(MyTwin);
+            Destroy(DeleteObjectOnRelaod);
+        }
     }
-
-    public void GetReferences()
-    {
-        StitchedObj = GameObject.FindGameObjectWithTag("StitchedCholi");
-        UnstitchedObj = GameObject.FindGameObjectWithTag("UnstitchedCholi");
-        GhaghraObj = GameObject.FindGameObjectWithTag("Ghaghra");
-    }
-
-    public void InvokeModelLoadedEvent(){
-
-         if (ModelLoadedEvent != null)
-        {
-            ModelLoadedEvent.Invoke();
-        }
-    }
-
-    public void ReloadApplication()
-    {
-        SceneManager.LoadScene("VirtuFit");
-        Destroy(MyTwin);
-        Destroy(DeleteObjectOnRelaod);
-    }
-}
