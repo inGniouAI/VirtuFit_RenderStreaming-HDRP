@@ -229,8 +229,6 @@ public class GameManager : GenericSingleton<GameManager>
 
         public void ReloadApplication()
         {
-            SceneManager.LoadScene("VirtuFit");
-            Destroy(MyTwin);
-            Destroy(DeleteObjectOnRelaod);
+            Application.Quit();
         }
     }
