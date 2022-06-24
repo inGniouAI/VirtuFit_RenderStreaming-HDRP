@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/$Main/Scenes/VirtuFit/VirtuFIt.unity
+    path: Assets/Scenes/VirtuFit/VirtuFIt.unity
     guid: d9aebf4a84d90af479f48cf63b31b4eb
   - enabled: 1
-    path: Assets/Scenes/Ballroom/Ballroom0.unity
+    path: Assets/Scenes/Ballroom/Ballroom_0.unity
     guid: 933ddfd13a005d7449d20d3073f98699
   - enabled: 1
-    path: Assets/Scenes/Ballroom/Ballroom1.unity
+    path: Assets/Scenes/SecondScene/Ballroom_1.unity
     guid: a185995049aff4a1fbdf608c0715a27a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f939568a6bcbd480489c1c292595d69d, type: 2}
