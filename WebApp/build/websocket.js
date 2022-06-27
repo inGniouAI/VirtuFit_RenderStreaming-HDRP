@@ -48,6 +48,13 @@ var WSSignaling = /** @class */ (function () {
                         console.log("candidate from websocket");
                         handler.onCandidate(ws, msg.data);
                         break;
+                    case "CustomEvent":
+                        console.log("time to restart unity");
+                        setTimeout(function () {
+                            handler.onRestartUnityapp();
+                        }, 2000);
+                        //  handler.onConnect(ws, msg.connectionId);
+                        break;
                     default:
                         break;
                 }

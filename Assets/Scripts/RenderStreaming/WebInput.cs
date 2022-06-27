@@ -11,26 +11,20 @@ public class WebInput : WebBrowserInputChannelReceiver
 
    public override void SetChannel(string connectionId, RTCDataChannel channel){
 
-          this.channel = channel;
-        base.SetChannel(connectionId,channel);
+        this.channel = channel;
+      //  base.SetChannel(connectionId,channel);
      if (channel == null)
             {
-               
             }
             else
             {
-                
                 channel.OnMessage += VirtuFitProcessInput;
                 channel.OnClose += CloseChannel;
-               
             }
-           
-
-
     }
     void CloseChannel(){
         Debug.Log("Datachannel Closed");
-        GameManager.Instance.ReloadApplication();
+        Application.Quit();
     }
     enum EventType
     {

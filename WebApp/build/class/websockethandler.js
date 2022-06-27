@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
+exports.onRestartUnityapp = exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
 var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
@@ -69,9 +69,6 @@ function remove(ws) {
         connectionPair.delete(connectionId);
     });
     clients.delete(ws);
-    setTimeout(function () {
-        RestartUnityApp();
-    }, 2000);
 }
 exports.remove = remove;
 function onConnect(ws, connectionId) {
@@ -175,14 +172,15 @@ function onCandidate(ws, message) {
 }
 exports.onCandidate = onCandidate;
 var exec = require('child_process').execFile;
-var RestartUnityApp = function () {
+function onRestartUnityapp() {
     console.log("fun() start");
     exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function (err, data) {
         console.log(err);
         console.log(data.toString());
     });
     modify(Ipport);
-};
+}
+exports.onRestartUnityapp = onRestartUnityapp;
 var Ipport;
 function SetIpPort(ipport) {
     Ipport = ipport;

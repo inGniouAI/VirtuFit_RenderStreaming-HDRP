@@ -163,13 +163,13 @@ public class GameManager : GenericSingleton<GameManager>
 #if UNITY_STANDALONE_OSX
         if (!string.IsNullOrEmpty(AvatarCode))
         {
-            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Textures";
+            AvatarDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Textures";
         }
         else
         {
-            AvatarDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Textures";
+            AvatarDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
+            TextureDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Textures";
         }
 #endif
 #if UNITY_STANDALONE_WIN
@@ -225,10 +225,5 @@ public class GameManager : GenericSingleton<GameManager>
             {
                 ModelLoadedEvent.Invoke();
             }
-        }
-
-        public void ReloadApplication()
-        {
-            Application.Quit();
         }
     }

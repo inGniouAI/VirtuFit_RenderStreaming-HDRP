@@ -75,6 +75,9 @@ export class VirtualFitReceiver {
     });
     this.pc.addEventListener('connect', () => {
       _this.onconnect();
+      console.Log("data chennle connect");
+      console.Log("data chennle connect peer pc sdp "+ this.pc.localDescription.sdp);
+
     });
     this.pc.addEventListener('trackevent', (e) => {
       const data = e.detail;
@@ -86,8 +89,14 @@ export class VirtualFitReceiver {
       }
     });
     this.pc.addEventListener('sendoffer', (e) => {
+      const cEvent = e.detail;
+      _this.signaling.sendOffer(cEvent.connectionId, cEvent.sdp);
+      console.log("cEvent.sdp "+cEvent.sdp);
+    });
+    this.pc.addEventListener('sendCustomEvent', (e) => {
       const offer = e.detail;
-      _this.signaling.sendOffer(offer.connectionId, offer.sdp);
+      _this.signaling.sendCustomEvent(offer.connectionId, offer.sdp);
+      console.log("sendCustomEvent ");
     });
     this.pc.addEventListener('sendanswer', (e) => {
       const answer = e.detail;
@@ -144,6 +153,7 @@ export class VirtualFitReceiver {
       Logger.log("The error " + e.error.message + " occurred\n while handling data with proxy server.");
     };
     this.channel.onclose = function () {
+      console.log("this.channel.onclose with send custom event");
       Logger.log('Datachannel disconnected.');
     };
     this.channel.onmessage = async (msg) => {
@@ -221,12 +231,19 @@ export class VirtualFitReceiver {
     }
   }
   async stop() {
+    if (this.pc != null) {
+      console.log("Stop Window");
+      this.pc.dispatchEvent(new CustomEvent('sendCustomEvent', { detail: { connectionId: this.connectionId } }));
+    //  this.pc.dispatchEvent(new CustomEvent('Customevent', { detail: { connectionId: this.connectionId } }));
+
+    }
     if (this.signaling) {
       await this.signaling.stop();
       this.signaling = null;
     }
 
     if (this.pc) {
+    
       this.pc.close();
       this.pc = null;
     }

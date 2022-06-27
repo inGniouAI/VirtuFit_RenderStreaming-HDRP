@@ -240,7 +240,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
 #endif
 #if UNITY_STANDALONE_OSX
-          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
+          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
 #endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
@@ -254,7 +254,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
-          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
+          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
 #endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_ = Texture2D.normalTexture;
@@ -269,7 +269,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
-        bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
+        bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
 #endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
@@ -283,7 +283,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
-         bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/RenderStreaming/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
+         bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
 #endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;

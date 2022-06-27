@@ -274,7 +274,12 @@ export class WebSocketSignaling extends EventTarget {
     Logger.log(sendJson);
     this.websocket.send(sendJson);
   }
-
+  sendCustomEvent(connectionId, sdp) {
+    const data = { 'sdp': sdp, 'connectionId': connectionId };
+    const sendJson = JSON.stringify({ type: "CustomEvent", from: connectionId, data: data });
+    Logger.log(sendJson);
+    this.websocket.send(sendJson);
+  }
   sendAnswer(connectionId, sdp) {
     const data = { 'sdp': sdp, 'connectionId': connectionId };
     const sendJson = JSON.stringify({ type: "answer", from: connectionId, data: data });

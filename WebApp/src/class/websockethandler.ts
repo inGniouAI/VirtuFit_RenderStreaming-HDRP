@@ -66,6 +66,7 @@ function remove(ws: WebSocket): void {
    
   const connectionIds = clients.get(ws);
   connectionIds.forEach(connectionId => {
+
     const pair = connectionPair.get(connectionId);
     if (pair) {
       const otherSessionWs = pair[0] == ws ? pair[1] : pair[0];
@@ -77,9 +78,7 @@ function remove(ws: WebSocket): void {
   });
 
   clients.delete(ws);
-  setTimeout(function(){
-    RestartUnityApp();
-  }, 2000); 
+ 
  
 
 }
@@ -195,16 +194,17 @@ function onCandidate(ws: WebSocket, message: any): void {
 }
 var exec = require('child_process').execFile;
 
-var RestartUnityApp =function(){
-   console.log("fun() start");
-   exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
-        console.log(err)
-        console.log(data.toString());                       
-    });  
-    modify(Ipport);
+function onRestartUnityapp(): void {
+  console.log("fun() start");
+  exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
+       console.log(err)
+       console.log(data.toString());                       
+   });  
+   modify(Ipport);
 }
+
 let Ipport;
 export function SetIpPort(ipport){
   Ipport = ipport;
 }
-export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate };
+export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate, onRestartUnityapp };
