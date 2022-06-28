@@ -4,8 +4,7 @@ import { InputRemoting } from "./inputremoting.js";
 import Peer from "./peer.js";
 import * as Logger from "./logger.js";
 import { sendInputTextEvent } from "./register-events.js";
-
-
+import { AvatarCode, SkuCode} from "./main.js"
 function uuid4() {
   var temp_url = URL.createObjectURL(new Blob());
   var uuid = temp_url.toString();
@@ -18,7 +17,61 @@ function isTouchDevice() {
     (navigator.maxTouchPoints > 0) ||
     (navigator.msMaxTouchPoints > 0));
 }
+var analyticSdp ;//= "http://www.example.com/landing.aspx?referrer=10.11.12.13an12.11.12.13";
+var analyticIps = "";
+var analyticDatetime = "" ;
+var time1;
+var time2;
+var analyticTotalSpenttime;
+SetAnalyticData();
+function SetAnalyticData(){
+  time1 = new Date();
+  const d = new Date();
+  analyticDatetime = d.getTime().toString();
+  console.log("analyticDatetime "+analyticDatetime);
 
+}
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function convertMsToTime(milliseconds) {
+  let seconds = Math.floor(milliseconds / 1000);
+  let minutes = Math.floor(seconds / 60);
+ // let hours = Math.floor(minutes / 60);
+
+  seconds = seconds % 60;
+  minutes = minutes % 60;
+
+  // 👇️ If you don't want to roll hours over, e.g. 24 to 00
+  // 👇️ comment (or remove) the line below
+  // commenting next line gets you `24:00:00` instead of `00:00:00`
+  // or `36:15:31` instead of `12:15:31`, etc.
+//  hours = hours % 24;
+
+  return `${padTo2Digits(minutes)}:${padTo2Digits(
+    seconds,
+  )}`;
+}
+
+function findIP(onNewIP,sdps) { //  onNewIp - your listener function for new IPs
+  var noop = function() {};
+  var localIPs = {};
+
+  var ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
+  var key;
+
+  function ipIterate(ip) {
+    if (!localIPs[ip]) onNewIP(ip);
+    localIPs[ip] = true;
+  }
+  sdps.match(ipRegex).forEach(ipIterate);
+}
+function addIP(ip) {
+  analyticIps +=";"+ip;
+  console.log('got ip: ', analyticIps);
+
+}
 
 export class VirtualFitReceiver {
   constructor(videoElement) {
@@ -76,8 +129,7 @@ export class VirtualFitReceiver {
     this.pc.addEventListener('connect', () => {
       _this.onconnect();
       console.Log("data chennle connect");
-      console.Log("data chennle connect peer pc sdp "+ this.pc.localDescription.sdp);
-
+     // console.Log("data chennle connect peer pc sdp "+ this.pc.localDescription.sdp);
     });
     this.pc.addEventListener('trackevent', (e) => {
       const data = e.detail;
@@ -92,11 +144,20 @@ export class VirtualFitReceiver {
       const cEvent = e.detail;
       _this.signaling.sendOffer(cEvent.connectionId, cEvent.sdp);
       console.log("cEvent.sdp "+cEvent.sdp);
+      analyticSdp = cEvent.sdp.toString();
+      console.log("set analyticSdp "+analyticSdp);
+
+
     });
     this.pc.addEventListener('sendCustomEvent', (e) => {
       const offer = e.detail;
       _this.signaling.sendCustomEvent(offer.connectionId, offer.sdp);
       console.log("sendCustomEvent ");
+    });
+    this.pc.addEventListener('sendAnalytic', (e) => {
+      const analytic = e.detail;
+      _this.signaling.sendAnalytic(analytic.connectionId,analytic.dateTimeId, analytic.sku, analytic.avatarCode,analytic.ipv4,analytic.totalTimeSpent);
+      console.log("sendAnalytic ");
     });
     this.pc.addEventListener('sendanswer', (e) => {
       const answer = e.detail;
@@ -230,11 +291,19 @@ export class VirtualFitReceiver {
         break;
     }
   }
+  
   async stop() {
+    time2 = new Date();
+    console.log("analyticSdp "+analyticSdp);
+
+    findIP(addIP,analyticSdp);
+    var timediff = time2 - time1;
+    analyticTotalSpenttime = convertMsToTime(timediff).toString();
+    console.log("analyticTotalSpenttime "+analyticTotalSpenttime);
     if (this.pc != null) {
       console.log("Stop Window");
+      this.pc.dispatchEvent(new CustomEvent('sendAnalytic', { detail: { connectionId: this.connectionId,dateTimeId:analyticDatetime, sku: SkuCode, avatarCode:AvatarCode,  ipv4:analyticIps, totalTimeSpent:analyticTotalSpenttime} }));
       this.pc.dispatchEvent(new CustomEvent('sendCustomEvent', { detail: { connectionId: this.connectionId } }));
-    //  this.pc.dispatchEvent(new CustomEvent('Customevent', { detail: { connectionId: this.connectionId } }));
 
     }
     if (this.signaling) {
@@ -249,5 +318,6 @@ export class VirtualFitReceiver {
     }
   }
   
+ 
 }
 

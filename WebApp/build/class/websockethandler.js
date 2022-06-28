@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onRestartUnityapp = exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
+exports.onAnalytic = exports.onRestartUnityapp = exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
 var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
@@ -31,6 +31,28 @@ function modify(ipport) {
     });
 }
 exports.modify = modify;
+function SetAnalytic(dateTimeId, avatarCode, sku, totalTimeSpent, ipv4) {
+    var params = {
+        TableName: "AnalyticData",
+        Key: { "DateTimeId": dateTimeId },
+        UpdateExpression: "set avatarCode = :avatarCode, sku = :sku, totalTimeSpent = :totalTimeSpent, ipv4 = :ipv4 ",
+        ExpressionAttributeValues: {
+            ":avatarCode": avatarCode,
+            ":sku": sku,
+            ":totalTimeSpent": totalTimeSpent,
+            ":ipv4": ipv4
+        },
+        ReturnValues: "UPDATED_NEW"
+    };
+    docClient.update(params, function (err, data) {
+        if (err) {
+            console.log("users::update::error - " + JSON.stringify(err, null, 2));
+        }
+        else {
+            console.log("users::update::success " + JSON.stringify(data));
+        }
+    });
+}
 var isPrivate;
 console.log("WebSocket handler");
 // [{sessonId:[connectionId,...]}]
@@ -171,6 +193,20 @@ function onCandidate(ws, message) {
     });
 }
 exports.onCandidate = onCandidate;
+function onAnalytic(ws, message) {
+    var sku = message.sku;
+    var avatarCode = message.avatarCode;
+    var dateTimeId = message.dateTimeId;
+    var ipv4 = message.ipv4;
+    var totalTimeSpent = message.totalTimeSpent;
+    console.log("dateTimeId " + dateTimeId);
+    console.log("ipv4 " + ipv4);
+    console.log("totalTimeSpent " + totalTimeSpent);
+    console.log("avatarCode " + avatarCode);
+    console.log("sku " + sku);
+    SetAnalytic(dateTimeId, avatarCode, sku, totalTimeSpent, ipv4);
+}
+exports.onAnalytic = onAnalytic;
 var exec = require('child_process').execFile;
 function onRestartUnityapp() {
     console.log("fun() start");

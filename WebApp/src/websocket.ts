@@ -18,7 +18,6 @@ export default class WSSignaling {
 
       ws.onclose = (): void => {
         console.log("connection remove");
-
         handler.remove(ws);
       }
 
@@ -42,28 +41,37 @@ export default class WSSignaling {
         switch (msg.type) {
           case "connect":
             console.log("connect from websocket");
-
             handler.onConnect(ws, msg.connectionId);
             break;
           case "disconnect":
             console.log("disconnect from websocket");
-
             handler.onDisconnect(ws, msg.connectionId);
             break;
           case "offer":
             console.log("offer from websocket");
-
             handler.onOffer(ws, msg.data);
             break;
           case "answer":
             console.log("answer from websocket");
-
             handler.onAnswer(ws, msg.data);
             break;
           case "candidate":
             console.log("candidate from websocket");
-
             handler.onCandidate(ws, msg.data);
+            break;
+          case "CustomEvent":
+            console.log("time to restart unity");
+            setTimeout(function(){
+                handler.onRestartUnityapp();
+            }, 2000); 
+            //  handler.onConnect(ws, msg.connectionId);
+            break;
+          case "analytic":
+            console.log("Analytic");
+            handler.onAnalytic(ws, msg.data);
+            break; 
+          case "openUnity" :
+            console.log("onUnityappOpen");
             break;
           default:
             break;

@@ -55,6 +55,13 @@ var WSSignaling = /** @class */ (function () {
                         }, 2000);
                         //  handler.onConnect(ws, msg.connectionId);
                         break;
+                    case "analytic":
+                        console.log("Analytic");
+                        handler.onAnalytic(ws, msg.data);
+                        break;
+                    case "openUnity":
+                        console.log("onUnityappOpen");
+                        break;
                     default:
                         break;
                 }

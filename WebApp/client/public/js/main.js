@@ -2,8 +2,11 @@ import * as Config from "./config.js";
 import { VirtualFitReceiver } from "./virtufit.js";
 import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent, sendInputTextEvent , sendEnvChangeId, sendNecklaceChangeId, sendBanglesChangeId} from "./register-events.js";
 import { getServerConfig } from "./config.js";
+export var AvatarCode;
+export var SkuCode;
 var AvtarCodeVal;
-var InputSettings;
+ var InputSettings;
+
 
 OnLoad();
 setup();
@@ -243,8 +246,9 @@ function openNav() {
             var val1 = "<h3>After taking multiple parameters from the previous page, we have the following information that you need:</h3><br /><br />";
             val1 += "<b>AvatarCode:</b> " + queryString["AvatarCode"] + "<br> <b>Sku:</b> " + queryString["Sku"];
             document.getElementById("lblredirect").innerHTML = val1; 
-  
-            var val = queryString["AvatarCode"] +"/"+ queryString["Sku"];
+            AvatarCode = queryString["AvatarCode"];
+            SkuCode = queryString["Sku"];
+            var val = AvatarCode +"/"+ SkuCode;
 
             AvtarCodeVal = val;
          

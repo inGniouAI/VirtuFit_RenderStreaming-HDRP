@@ -32,6 +32,31 @@ export function modify (ipport) {
         }
     });
 }
+ function SetAnalytic (dateTimeId,avatarCode,sku,totalTimeSpent,ipv4) {
+    
+  var params = {
+      TableName: "AnalyticData",
+      Key: { "DateTimeId": dateTimeId },
+      UpdateExpression: "set avatarCode = :avatarCode, sku = :sku, totalTimeSpent = :totalTimeSpent, ipv4 = :ipv4 ",
+      ExpressionAttributeValues: {
+          ":avatarCode": avatarCode,
+          ":sku": sku,
+          ":totalTimeSpent": totalTimeSpent,
+          ":ipv4": ipv4
+
+      },
+      ReturnValues: "UPDATED_NEW"
+
+  };
+  docClient.update(params, function (err, data) {
+
+      if (err) {
+          console.log("users::update::error - " + JSON.stringify(err, null, 2));
+      } else {
+          console.log("users::update::success "+JSON.stringify(data) );
+      }
+  });
+}
 let isPrivate: boolean;
 console.log("WebSocket handler");
 
@@ -192,6 +217,19 @@ function onCandidate(ws: WebSocket, message: any): void {
     k.send(JSON.stringify({ from: connectionId, to: "", type: "candidate", data: candidate }));
   });
 }
+function onAnalytic(ws: WebSocket, message: any): void {
+  const sku = message.sku;
+  const avatarCode = message.avatarCode;
+  const dateTimeId = message.dateTimeId;
+  const ipv4 = message.ipv4;
+  const totalTimeSpent = message.totalTimeSpent;
+  console.log("dateTimeId "+dateTimeId);
+  console.log("ipv4 "+ipv4);
+  console.log("totalTimeSpent "+totalTimeSpent);
+  console.log("avatarCode "+avatarCode);
+  console.log("sku "+sku);
+  SetAnalytic(dateTimeId,avatarCode,sku,totalTimeSpent,ipv4);
+}
 var exec = require('child_process').execFile;
 
 function onRestartUnityapp(): void {
@@ -207,4 +245,4 @@ let Ipport;
 export function SetIpPort(ipport){
   Ipport = ipport;
 }
-export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate, onRestartUnityapp };
+export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate, onRestartUnityapp, onAnalytic };
