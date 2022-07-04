@@ -94,7 +94,7 @@ using Unity.RenderStreaming;
             foreach (var mouse in listMouse)
             {
                 if (IsMouseDragged(mouse, true)){
-                    LookRotationCamera(mouse.delta.ReadValue());
+                    LookRotationCamerabyMouse(mouse.delta.ReadValue());
                 }
                 else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
                     Panning(mouse.delta.ReadValue().y);
@@ -108,15 +108,19 @@ using Unity.RenderStreaming;
             foreach (var screen in listScreen)
             {
                 var touches = screen.GetTouches();
-                
-                 if (touches.Count() == 2)
+                if (touches.Count() == 3)
+                {
+                    var activeTouches = touches.ToArray();
+                    PanningByTouch( activeTouches[0], activeTouches[1]);
+                }
+                else if (touches.Count() == 2)
                 {
                     var activeTouches = touches.ToArray();
                     ZoomCameraByTouch(activeTouches[0],activeTouches[1]);
                 }else if (touches.Count() == 1)
                 {
                     var activeTouches = touches.ToArray();
-                    LookRotationCamera(activeTouches[0].delta);
+                    LookRotationCameraByTouch(activeTouches[0].delta);
                 }
             }
         
@@ -144,7 +148,9 @@ using Unity.RenderStreaming;
         }
 // TODO FROM HETAl
     [SerializeField] Camera renderCamera;    
-    public float RotationsSpeed = 5.0f;
+    public float RotationsSpeedForMouse = 5.0f;
+    public float RotationsSpeedForTouch = 5.0f;
+
     void Start () {
         GameManager.Instance.ModelLoadedEvent.AddListener(ModelLoaded);
         targetZoom = renderCamera.fieldOfView;
@@ -159,10 +165,17 @@ using Unity.RenderStreaming;
         }
     }
 
-private void LookRotationCamera(Vector2 input){
+private void LookRotationCamerabyMouse(Vector2 input){
      if(isModel) {
         inputValue = input.x;
-        transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeed);
+        transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
+       LookRotation();
+     }
+}
+private void LookRotationCameraByTouch(Vector2 input){
+     if(isModel) {
+        inputValue = input.x;
+        transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForTouch);
        LookRotation();
      }
 }
@@ -179,11 +192,15 @@ private void LookRotation(){
 }
     private float targetZoom;
     public float zoomFactor = 0.01f;
+        public float zoomFactorForTouch = 0.01f;
+
     public float ZoomMax = 60f;
     public float ZoomMin = 5f;
     public float ZoomPan = 30f;
 
     [SerializeField] private float zoomLerpSpeed = 5;  
+        [SerializeField] private float zoomLerpSpeedByTouch = 5;  
+
      float currentZoom;
   
    private void ZoomCameraByMouse(Vector2 vector2){
@@ -200,11 +217,12 @@ private void LookRotation(){
     public int PanLowerLimit = 2;
     private Vector3 targetPanV3;
     [SerializeField] private float PanLerpSpeed = 5;
+    public float panFactor = 0.01f;
 
     private void Panning(float vector2y){
         
         float DragData = vector2y;
-        targetPan -= DragData * zoomFactor;
+        targetPan -= DragData * panFactor;
         targetPan = Mathf.Clamp(targetPan, PanUpperLimit, PanLowerLimit);
         targetPanV3 = new Vector3(transform.position.x,targetPan,transform.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPanV3, Time.deltaTime * PanLerpSpeed);
@@ -230,8 +248,9 @@ private void LookRotation(){
         //Calculate if fingers are pinching togethehar or apart
         float newMultiTouchDistance = Vector2.Distance(firstTouch.screenPosition, secondTouch.screenPosition);
          diff = newMultiTouchDistance-lastMultiTouchDistance;
-    if (renderCamera.fieldOfView < ZoomPan && diff <=1 && diff >=-1){
-        PanningByTouch( firstTouch, secondTouch, midpoint);
+
+    if (diff <=1 && diff >=-1){
+      //  
 
     }else{
         //Call the zoom method on the camera, specifying if it's zooming in our out
@@ -241,19 +260,31 @@ private void LookRotation(){
         lastMultiTouchDistance = newMultiTouchDistance;
     }
    
-    private const float ZoomAmount = 0.5f;
+    private const float ZoomAmountbyTouch = 0.5f;
    void Zoom(bool zoomOut){
-       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? ZoomAmount : -ZoomAmount), 5f, 90f);
-        renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, currentZoom, Time.deltaTime * zoomLerpSpeed);
+       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? ZoomAmountbyTouch : -ZoomAmountbyTouch), 5f, 90f);
+        renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, currentZoom, Time.deltaTime * zoomLerpSpeedByTouch);
         Camera.main.fieldOfView = renderCamera.fieldOfView;
    }
 float MAX_DIFFERENCE = 10f;
  Vector2 startPoint = Vector2.zero;
 
-   void PanningByTouch(EnhancedTouch firstTouch, EnhancedTouch secondTouch, Vector2 MidPoint){
-         
-     // get the difference between the two points.
-     var difference = startPoint - MidPoint;
+   void PanningByTouch(EnhancedTouch firstTouch, EnhancedTouch secondTouch){
+         if (renderCamera.fieldOfView < ZoomPan){
+            var midpoint = GetMidpoint(firstTouch, secondTouch);
+        if (firstTouch.phase == TouchPhase.Began || secondTouch.phase == TouchPhase.Began)
+        {
+            lastMultiTouchDistance = Vector2.Distance(firstTouch.screenPosition, secondTouch.screenPosition);
+              startPoint = midpoint;
+        }
+
+        // Ensure that remaining logic only executes if either finger is actively moving
+        if (firstTouch.phase != TouchPhase.Moved || secondTouch.phase != TouchPhase.Moved)
+        {
+            return;
+        }
+  // get the difference between the two points.
+     var difference = startPoint - midpoint;
      
      // now, get either x or y here. change this line to use x or y to your liking. 
      // makes it so that if x = MAX_DIFFERENCE, then result = 1
@@ -263,6 +294,7 @@ float MAX_DIFFERENCE = 10f;
      result = Mathf.Clamp(result, -1.0f, 1.0f);
 
      Panning(result);
+         }
    }
    Vector2 GetMidpoint(EnhancedTouch touch1, EnhancedTouch touch2)
      {
