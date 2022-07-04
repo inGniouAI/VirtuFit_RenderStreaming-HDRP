@@ -237,7 +237,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
 #endif
 #if UNITY_STANDALONE_WIN
-        bytes = File.ReadAllBytes($"C:/Users/Anuj Sharma/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
+        bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
 #endif
 #if UNITY_STANDALONE_OSX
           bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
@@ -251,7 +251,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
 #endif
 #if UNITY_STANDALONE_WIN
-        bytes = File.ReadAllBytes($"C:/Users/Anuj Sharma/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
+        bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
           bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
@@ -266,7 +266,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
 #endif
 #if UNITY_STANDALONE_WIN
-        bytes = File.ReadAllBytes($"C:/Users/Anuj Sharma/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
+        bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
         bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
@@ -280,7 +280,7 @@ GameObject Bangles2;
         bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
 #endif
 #if UNITY_STANDALONE_WIN
-        bytes = File.ReadAllBytes($"C:/Users/Anuj Sharma/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
+        bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
 #endif
 #if UNITY_STANDALONE_OSX
          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
