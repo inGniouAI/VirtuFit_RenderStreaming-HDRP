@@ -8,9 +8,6 @@ using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 using Unity.RenderStreaming;
 
-#if URS_USE_AR_SUBSYSTEMS
-using UnityEngine.XR.ARSubsystems;
-#endif
     using UnityInputSystem = UnityEngine.InputSystem.InputSystem;
     static class TouchScreenExtension
     {
@@ -25,23 +22,15 @@ using UnityEngine.XR.ARSubsystems;
     {
 
         [SerializeField] private InputChannelReceiverBase receiver;
-
-        private List<Gamepad> listGamepad = new List<Gamepad>();
-        private List<Keyboard> listKeyboard = new List<Keyboard>();
         private List<Mouse> listMouse = new List<Mouse>();
-        private List<Gyroscope> listGyroscpe = new List<Gyroscope>();
-        private List<TrackedDevice> listTracker = new List<TrackedDevice>();
         private List<Touchscreen> listScreen = new List<Touchscreen>();
 
-
-#if URS_USE_AR_SUBSYSTEMS
-        private List<HandheldARInputDevice> listHandheld = new List<HandheldARInputDevice>();
-#endif
         void Awake()
         {
             if (receiver == null)
                 receiver = GetComponent<InputChannelReceiverBase>();
             receiver.onDeviceChange += OnDeviceChange;
+           /// receiver.on
 
             EnhancedTouchSupport.Enable();
             currentZoom = renderCamera.fieldOfView;
@@ -68,74 +57,38 @@ using UnityEngine.XR.ARSubsystems;
             switch (device)
             {
                 case Mouse mouse:
-                    Debug.Log("mouce device added");
 
-                    if (add)
+                    if (add){
                         listMouse.Add(mouse);
-                    else
+                        Debug.Log("mouce device added"+listMouse.Count);
+
+                    }
+                    else{
                         listMouse.Remove(mouse);
-                    return;
-                case Keyboard keyboard:
-                     Debug.Log("keyboard device added");
+                        Debug.Log("mouce device removed"+listMouse.Count);
 
-                    if (add)
-                        listKeyboard.Add(keyboard);
-                    else
-                        listKeyboard.Remove(keyboard);
+                    }
                     return;
+               
                 case Touchscreen screen:
-                    Debug.Log("Touchscreen device added");
 
-                    if(add)
+                    if(add){
                         listScreen.Add(screen);
-                    else
+                        Debug.Log("Touchscreen device added"+listScreen.Count);
+
+                    }
+                    else{
                         listScreen.Remove(screen);
-                    return;
-                case Gamepad pad:
-                    Debug.Log("Gamepad device added");
+                        Debug.Log("Touchscreen device removed"+listScreen.Count);
 
-                    if(add)
-                        listGamepad.Add(pad);
-                    else
-                        listGamepad.Remove(pad);
+                    }
                     return;
-                case Gyroscope gyroscope:
-                    if (add)
-                        listGyroscpe.Add(gyroscope);
-                    else
-                        listGyroscpe.Remove(gyroscope);
-                    return;
-                case TrackedDevice tracker:
-                    if (add)
-                        listTracker.Add(tracker);
-                    else
-                        listTracker.Remove(tracker);
-                    return;
-#if URS_USE_AR_SUBSYSTEMS
-                case HandheldARInputDevice handheld:
-                    if (add)
-                        listHandheld.Add(handheld);
-                    else
-                        listHandheld.Remove(handheld);
-                    return;
-#endif
             }
-        }
 
-        void OnEnable()
-        {
-          
         }
 
         void FixedUpdate()
         {
-            foreach (var keyboard in listKeyboard)
-            {
-                if (keyboard.uKey.isPressed)
-                {
-                    return;
-                }
-            }
 
             // Rotation an zoom,pan by Mouse
             foreach (var mouse in listMouse)
@@ -190,7 +143,7 @@ using UnityEngine.XR.ARSubsystems;
             return false;
         }
 // TODO FROM HETAl
-    [SerializeField]  private Camera renderCamera;    
+    [SerializeField] Camera renderCamera;    
     public float RotationsSpeed = 5.0f;
     void Start () {
         GameManager.Instance.ModelLoadedEvent.AddListener(ModelLoaded);
@@ -274,7 +227,7 @@ private void LookRotation(){
             return;
         }
 
-        //Calculate if fingers are pinching together or apart
+        //Calculate if fingers are pinching togethehar or apart
         float newMultiTouchDistance = Vector2.Distance(firstTouch.screenPosition, secondTouch.screenPosition);
          diff = newMultiTouchDistance-lastMultiTouchDistance;
     if (renderCamera.fieldOfView < ZoomPan && diff <=1 && diff >=-1){
