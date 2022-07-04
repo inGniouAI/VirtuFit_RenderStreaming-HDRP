@@ -12,7 +12,7 @@ public class WebInput : WebBrowserInputChannelReceiver
    public override void SetChannel(string connectionId, RTCDataChannel channel){
 
         this.channel = channel;
-      //  base.SetChannel(connectionId,channel);
+        base.SetChannel(connectionId,channel);
      if (channel == null)
             {
             }
