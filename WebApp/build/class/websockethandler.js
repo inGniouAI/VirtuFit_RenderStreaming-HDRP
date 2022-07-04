@@ -11,15 +11,20 @@ var awsConfig = {
 };
 AWS.config.update(awsConfig);
 var docClient = new AWS.DynamoDB.DocumentClient();
+var isfromLocal = true;
 function modify(ipport) {
+    // if(isfromLocal){
+    //   return;
+    // }
     var params = {
         TableName: "ListOfInstances",
-        Key: { "Ip_port": ipport },
+        Key: { "Ip_port": "43.204.15.61:8448" },
         UpdateExpression: "set instance_status = :bystatus",
+        ConditionExpression: 'attribute_exists(Ip_port)',
         ExpressionAttributeValues: {
             ":bystatus": "Ready"
         },
-        ReturnValues: "UPDATED_NEW"
+        ReturnValues: "ALL_NEW"
     };
     docClient.update(params, function (err, data) {
         if (err) {
