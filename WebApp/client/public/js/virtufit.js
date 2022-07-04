@@ -26,8 +26,7 @@ var analyticTotalSpenttime;
 SetAnalyticData();
 function SetAnalyticData(){
   time1 = new Date();
-  const d = new Date();
-  analyticDatetime = d.getTime().toString();
+  analyticDatetime = formatDate(new Date());
   console.log("analyticDatetime "+analyticDatetime);
 
 }
@@ -54,6 +53,21 @@ function convertMsToTime(milliseconds) {
   )}`;
 }
 
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('/') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
 function findIP(onNewIP,sdps) { //  onNewIp - your listener function for new IPs
   var noop = function() {};
   var localIPs = {};
