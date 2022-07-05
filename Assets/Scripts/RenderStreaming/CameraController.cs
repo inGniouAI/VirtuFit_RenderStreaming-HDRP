@@ -96,9 +96,9 @@ using Unity.RenderStreaming;
                 if (IsMouseDragged(mouse, true)){
                     LookRotationCamerabyMouse(mouse.delta.ReadValue());
                 }
-                else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
-                    Panning(mouse.delta.ReadValue().y);
-                }
+               // else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
+                 //   Panning(mouse.delta.ReadValue().y);
+               // }
                 else{
                     ZoomCameraByMouse(mouse.scroll.ReadValue());
                     LookRotation();
@@ -158,6 +158,7 @@ using Unity.RenderStreaming;
 	}
     private bool isModel = false;
     private float inputValue ;
+
 	void ModelLoaded(){
         if(GameManager.Instance.MyTwin!=null) {
             Debug.Log("Model loaded ");
@@ -167,9 +168,15 @@ using Unity.RenderStreaming;
 
 private void LookRotationCamerabyMouse(Vector2 input){
      if(isModel) {
+       
         inputValue = input.x;
-        transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
-       LookRotation();
+        if(Mathf.Abs(input.x)> Mathf.Abs(input.y)){
+            transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
+            LookRotation();
+        }else if(renderCamera.fieldOfView < ZoomPan){
+            Panning(input.y);
+        }
+      
      }
 }
 private void LookRotationCameraByTouch(Vector2 input){
@@ -213,8 +220,8 @@ private void LookRotation(){
         renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, targetZoom, Time.deltaTime * zoomLerpSpeed);
     }
     private float targetPan;
-    public int PanUpperLimit = 0;
-    public int PanLowerLimit = 2;
+    public float PanUpperLimit = 0f;
+    public float PanLowerLimit = 1.5f;
     private Vector3 targetPanV3;
     [SerializeField] private float PanLerpSpeed = 5;
     public float panFactor = 0.01f;
