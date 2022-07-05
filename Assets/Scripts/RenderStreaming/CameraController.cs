@@ -96,9 +96,9 @@ using Unity.RenderStreaming;
                 if (IsMouseDragged(mouse, true)){
                     LookRotationCamerabyMouse(mouse.delta.ReadValue());
                 }
-                else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
-                    Panning(mouse.delta.ReadValue().y);
-                }
+                // else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
+                //     Panning(mouse.delta.ReadValue().y);
+                // }
                 else{
                     ZoomCameraByMouse(mouse.scroll.ReadValue());
                     LookRotation();
@@ -168,8 +168,12 @@ using Unity.RenderStreaming;
 private void LookRotationCamerabyMouse(Vector2 input){
      if(isModel) {
         inputValue = input.x;
-        transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
-       LookRotation();
+        if(Mathf.Abs(input.x)> Mathf.Abs(input.y)){
+            transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
+            LookRotation();
+        }else if(renderCamera.fieldOfView < ZoomPan){
+            Panning(input.y);
+        }
      }
 }
 private void LookRotationCameraByTouch(Vector2 input){
