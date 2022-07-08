@@ -24,6 +24,8 @@ using Unity.RenderStreaming;
         [SerializeField] private InputChannelReceiverBase receiver;
         private List<Mouse> listMouse = new List<Mouse>();
         private List<Touchscreen> listScreen = new List<Touchscreen>();
+        private Mouse mouseDevice;
+        private Touchscreen touchscreenDevice;
 
         void Awake()
         {
@@ -60,6 +62,7 @@ using Unity.RenderStreaming;
 
                     if (add){
                         listMouse.Add(mouse);
+                        mouseDevice = mouse;
                         Debug.Log("mouce device added"+listMouse.Count);
 
                     }
@@ -74,6 +77,7 @@ using Unity.RenderStreaming;
 
                     if(add){
                         listScreen.Add(screen);
+                        touchscreenDevice = screen;
                         Debug.Log("Touchscreen device added"+listScreen.Count);
 
                     }
@@ -87,23 +91,24 @@ using Unity.RenderStreaming;
 
         }
 
-        void FixedUpdate()
+        void Update()
         {
 
-            // Rotation an zoom,pan by Mouse
-            foreach (var mouse in listMouse)
-            {
-                if (IsMouseDragged(mouse, true)){
-                    LookRotationCamerabyMouse(mouse.delta.ReadValue());
+            // // Rotation an zoom,pan by Mouse
+            // foreach (var mouse in listMouse)
+            // {
+                if(mouseDevice!=null){
+                    if (IsMouseDragged(mouseDevice, true)){
+                    LookRotationCamerabyMouse(mouseDevice.delta.ReadValue());
                 }
-                // else if(IsMouseDragged(mouse, false) && renderCamera.fieldOfView < ZoomPan){
-                //     Panning(mouse.delta.ReadValue().y);
-                // }
-                else{
-                    ZoomCameraByMouse(mouse.scroll.ReadValue());
-                    LookRotation();
+               
+               else{
+                   ZoomCameraByMouse(mouseDevice.scroll.ReadValue());
+                   LookRotation();
+               }
                 }
-            }
+               
+         //  }
              // Rotation an zoom,pan by touch
             foreach (var screen in listScreen)
             {
@@ -172,7 +177,8 @@ private void LookRotationCamerabyMouse(Vector2 input){
             transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
             LookRotation();
         }else if(renderCamera.fieldOfView < ZoomPan){
-            Panning(input.y);
+            PanningbyMouse(mouseDevice);
+          
         }
      }
 }
@@ -217,12 +223,32 @@ private void LookRotation(){
         renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, targetZoom, Time.deltaTime * zoomLerpSpeed);
     }
     private float targetPan;
-    public int PanUpperLimit = 0;
-    public int PanLowerLimit = 2;
+    public float PanUpperLimit = 0f;
+    public float PanLowerLimit = 1.5f;
     private Vector3 targetPanV3;
     [SerializeField] private float PanLerpSpeed = 5;
     public float panFactor = 0.01f;
 
+Vector3 dragOrigin;
+
+ private void PanningbyMouse(Mouse m){
+        
+      if(Mouse.current.leftButton.wasPressedThisFrame)
+      {
+        dragOrigin = renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+      }
+
+    if(Mouse.current.leftButton.isPressed){
+        Vector3  difference = dragOrigin - renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Debug.Log("difference "+difference.y + "dragOrigin "+ dragOrigin + "renderCamera.ScreenToViewportPoint(m.position.ReadValue())" +renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue() ));
+        targetPan = transform.position.y + difference.y * panFactor;
+        targetPan = Mathf.Clamp(targetPan, PanUpperLimit, PanLowerLimit);
+        targetPanV3 = new Vector3(renderCamera.transform.position.x,targetPan,renderCamera.transform.position.z);
+        renderCamera.transform.position = Vector3.Lerp(renderCamera.transform.position, targetPanV3, Time.deltaTime * PanLerpSpeed);
+        dragOrigin = renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+    }
+
+    }
     private void Panning(float vector2y){
         
         float DragData = vector2y;
