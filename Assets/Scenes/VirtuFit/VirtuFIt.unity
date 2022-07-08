@@ -526,12 +526,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   receiver: {fileID: 725451158}
   renderCamera: {fileID: 725451154}
-  RotationsSpeedForMouse: 0.25
-  RotationsSpeedForTouch: 0.25
+  RotationsSpeedForMouse: 5
+  RotationsSpeedForTouch: 5
   zoomFactor: 0.1
   zoomFactorForTouch: 0.01
   ZoomMax: 60
   ZoomMin: 5
+<<<<<<< Updated upstream
   ZoomPan: 60
   zoomLerpSpeed: 1.5
   zoomLerpSpeedByTouch: 5
@@ -539,6 +540,15 @@ MonoBehaviour:
   PanLowerLimit: 1.5
   PanLerpSpeed: 1
   panFactor: 100
+=======
+  ZoomPan: 30
+  zoomLerpSpeed: 5
+  zoomLerpSpeedByTouch: 5
+  PanUpperLimit: 0
+  PanLowerLimit: 2
+  PanLerpSpeed: 5
+  panFactor: 0.01
+>>>>>>> Stashed changes
 --- !u!20 &725451154
 Camera:
   m_ObjectHideFlags: 0
@@ -594,9 +604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64875cfea3598b9419edac2dbbce0413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamingSize: {x: 1080, y: 1920}
-  depth: 24
-  antiAliasing: 8
+  streamingSize: {x: 720, y: 1280}
+  depth: 16
+  antiAliasing: 4
 --- !u!114 &725451157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,21 +751,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057e895431d70714a8cf7c6f50451c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarPresets:
-  - preset: {fileID: 1809243206116516555, guid: c525c64954b38d44fa87cc82e2b163df, type: 3}
-    type: 0
-  - preset: {fileID: 3148306793690946488, guid: 8611d4f309ee8cd47a00705458009cb6, type: 3}
-    type: 1
-  - preset: {fileID: 4937503405171811943, guid: 7b1ae8a21a3a8054783ceb882679ad98, type: 3}
-    type: 2
-  - preset: {fileID: 5837896671798946975, guid: bc064f96ebbdf90498755f2b5f8606d1, type: 3}
-    type: 3
-  - preset: {fileID: 1212297587294639427, guid: bc51990fef9b77a4b9a94ff73830f73f, type: 3}
-    type: 4
   apparelName: 
   MyTwinSkin: {fileID: 2100000, guid: b1761acb94b30149a9576473deb1ca89, type: 2}
   animationRig: {fileID: 9000000, guid: 903fa863bff1f494c9173a23f0feb8fe, type: 3}
   AccessoriesData: {fileID: 11400000, guid: 456168ed68f654f588ce420a1f1a0fc0, type: 2}
+  avatarPresets:
+  - preset: {fileID: 1027473606757483722, guid: 638f52def62a08346bf1c322fceb0cfb, type: 3}
+    type: 0
+  - preset: {fileID: 6673435888651787852, guid: 3f863eb91dcec0049820df90bd9ec8bc, type: 3}
+    type: 1
+  - preset: {fileID: 4758107920821638962, guid: 53cb219dd6a164247985aedebe977523, type: 3}
+    type: 2
+  - preset: {fileID: 6643030535625318730, guid: 049d8f5b4646907468f81a095ee9848e, type: 3}
+    type: 3
+  - preset: {fileID: 3861176382074647249, guid: b186f2364d1e9ba47aec6420e6ac4e50, type: 3}
+    type: 4
 --- !u!4 &847398299
 Transform:
   m_ObjectHideFlags: 0
@@ -1123,14 +1133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://43.204.221.102
+  urlSignaling: ws://localhost:8118
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
-  - credential: ingnious
+  - credential: 
     credentialType: 0
     urls:
-    - stun:43.204.221.102:3478
-    username: arch
+    - stun:stun.l.google.com:19302
+    username: 
   interval: 5
   hardwareEncoderSupport: 1
   handlers:
@@ -1249,20 +1259,48 @@ PrefabInstance:
       objectReference: {fileID: 1623734776}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingAddress
+<<<<<<< Updated upstream
       value: localhost:8000
       objectReference: {fileID: 0}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingSecured
       value: 0
+=======
+      value: localhost:8118
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: RenderStreamCam
       value: 
       objectReference: {fileID: 725451154}
     - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: Apparels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: DeleteObjectOnRelaod
       value: 
       objectReference: {fileID: 1007792474}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: ApparelTextures.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: ApparelTextures.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00c7549eabf0855448c5e889156f2daa, type: 2}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: ApparelTextures.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59c770ac3e64b10459923d455c1da342, type: 2}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: ApparelTextures.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 525e8306fdd8b8f4c91dbf6b88ebfeac, type: 2}
+    - target: {fileID: 8108215211609174408, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
+      propertyPath: ApparelTextures.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: abf77c3d8b9e0c14b9a2cd15e979463a, type: 2}
     - target: {fileID: 8108215211609174409, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -18,7 +18,7 @@ function modify(ipport) {
     // }
     var params = {
         TableName: "ListOfInstances",
-        Key: { "Ip_port": "43.204.15.61:8448" },
+        Key: { "Ip_port": ipport },
         UpdateExpression: "set instance_status = :bystatus",
         ConditionExpression: 'attribute_exists(Ip_port)',
         ExpressionAttributeValues: {

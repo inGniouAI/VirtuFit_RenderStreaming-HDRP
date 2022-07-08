@@ -24,6 +24,8 @@ public enum ProductType
 {
     StitchedCholiAndGhaghra,
     UnstitchedCholiAndGhaghra,
+    StitchedCholiAndSaree,
+    UnstitchedCholiAndSaree
 }
 
 [Serializable]
@@ -36,7 +38,6 @@ public class GameManager : GenericSingleton<GameManager>
 {
     [SerializeField] public Camera RenderStreamCam = null;
     [SerializeField] private bool isRunFromCmd = false;
-    [SerializeField] private GameObject DeleteObjectOnRelaod;
 
     public UnityEvent ModelLoadedEvent;
     public override void Awake()
@@ -52,17 +53,14 @@ public class GameManager : GenericSingleton<GameManager>
 
     [HideInInspector] public string TextureDirectory = null;
     [HideInInspector] public string TextureID = null;
-    [HideInInspector] private string DefaultTextureID = "144";
-    [HideInInspector] public GameObject UnstitchedObj;
-    [HideInInspector] public Material Unstitched_CholiMat;
-    [HideInInspector] public GameObject StitchedObj;
-    [HideInInspector] public Material Stitched_CholiMat;
-    [HideInInspector] public GameObject GhaghraObj;
-    [HideInInspector] public Material GhaghraMat;
+    [HideInInspector] public string DefaultTextureID = "144";
+    [HideInInspector] public string DefaultAvatarCode = "0001";
+    [SerializeField] public GameObject[] Apparels;
+    [SerializeField] public Material[] ApparelTextures;
+    [SerializeField] public bool AnimationState;
 
     [HideInInspector] public GameObject MyTwin = null;
     [HideInInspector] public string AvatarCode = null;
-    [HideInInspector] private string DefaultAvatarCode = "0001";
 
 
     [HideInInspector] public GameState GlobalGameState;
@@ -83,11 +81,68 @@ public class GameManager : GenericSingleton<GameManager>
                 SceneManager.LoadScene("VirtuFit");
                 break;
             case GameState.Simulation:
+                AparelManager();
                 SceneManager.LoadScene($"Ballroom_{id.ToString()}");
-                UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
                 break;
         }
         #endregion
+    }
+
+    private void AparelManager()
+    {
+        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_1_stitched_diffused.png"))
+        {
+            UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndGhaghra);
+            MyTwin.GetComponent<Animator>().enabled = true;
+            Debug.Log($"{GlobalProductType}");
+        }
+        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_1_unstitched_diffused.png"))
+        {
+            UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
+            MyTwin.GetComponent<Animator>().enabled = true;
+            Debug.Log($"{GlobalProductType}");
+        }
+        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_S1_stitched_diffused.png"))
+        {
+            UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndSaree);
+            MyTwin.GetComponent<Animator>().enabled = false;
+            Debug.Log($"{GlobalProductType}");
+        }
+        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_S1_unstitched_diffused.png"))
+        {
+            UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndSaree);
+            MyTwin.GetComponent<Animator>().enabled = false;
+            Debug.Log($"{GlobalProductType}");
+        }
+    }
+
+    public void AvatarTypeManager()
+    {
+        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/XS.txt"))
+        {
+            UpdateAvatarType(GlobalAvatarType = AvatarType.ExtraSmall);
+            Debug.Log($"{GlobalAvatarType}");
+        }
+        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/S.txt"))
+        {
+            UpdateAvatarType(GlobalAvatarType = AvatarType.Small);
+            Debug.Log($"{GlobalAvatarType}");
+        }
+        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/M.txt"))
+        {
+            UpdateAvatarType(GlobalAvatarType = AvatarType.Medium);
+            Debug.Log($"{GlobalAvatarType}");
+        }
+        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/L.txt"))
+        {
+            UpdateAvatarType(GlobalAvatarType = AvatarType.Large);
+            Debug.Log($"{GlobalAvatarType}");
+        }
+        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/XL.txt"))
+        {
+            UpdateAvatarType(GlobalAvatarType = AvatarType.ExtraLarge);
+            Debug.Log($"{GlobalAvatarType}");
+        }
     }
 
     public void UpdateAvatarType(AvatarType newAvatarType)
@@ -116,16 +171,36 @@ public class GameManager : GenericSingleton<GameManager>
         switch (newProductType)
         {
             case ProductType.StitchedCholiAndGhaghra:
-                LoadTextures(TextureID, "1_stitched", Texture2D_, Stitched_CholiMat);
-                LoadTextures(TextureID, "2", Texture2D_, GhaghraMat);
-                StitchedObj.SetActive(true);
-                UnstitchedObj.SetActive(false);
+                LoadTextures(TextureID, "1_stitched", Texture2D_, ApparelTextures[0]);
+                LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]);
+                Apparels[0].SetActive(true);
+                Apparels[2].SetActive(true);
+                Apparels[1].SetActive(false);
+                Apparels[3].SetActive(false);
                 break;
             case ProductType.UnstitchedCholiAndGhaghra:
-                LoadTextures(TextureID, "1_unstitched", Texture2D_, Unstitched_CholiMat);
-                LoadTextures(TextureID, "2", Texture2D_, GhaghraMat);
-                UnstitchedObj.SetActive(true);
-                StitchedObj.SetActive(false);
+                LoadTextures(TextureID, "1_unstitched", Texture2D_, ApparelTextures[1]);
+                LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]);
+                Apparels[1].SetActive(true);
+                Apparels[2].SetActive(true);
+                Apparels[0].SetActive(false);
+                Apparels[3].SetActive(false);
+                break;
+            case ProductType.StitchedCholiAndSaree:
+                LoadTextures(TextureID, "S1_stitched", Texture2D_, ApparelTextures[0]);
+                LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]);
+                Apparels[0].SetActive(true);
+                Apparels[3].SetActive(true);
+                Apparels[2].SetActive(false);
+                Apparels[1].SetActive(false);
+                break;
+            case ProductType.UnstitchedCholiAndSaree:
+                LoadTextures(TextureID, "S1_unstitched", Texture2D_, ApparelTextures[1]);
+                LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]);
+                Apparels[1].SetActive(true);
+                Apparels[3].SetActive(true);
+                Apparels[0].SetActive(false);
+                Apparels[2].SetActive(false);
                 break;
         }
     }
@@ -144,7 +219,6 @@ public class GameManager : GenericSingleton<GameManager>
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_223d41bb0338467abb2b4c71b5026b14", texture2D_);
-
     }
     public void UpdateAvatarDirectory()
     {
@@ -214,9 +288,10 @@ public class GameManager : GenericSingleton<GameManager>
 
         public void GetReferences()
         {
-            StitchedObj = GameObject.FindGameObjectWithTag("StitchedCholi");
-            UnstitchedObj = GameObject.FindGameObjectWithTag("UnstitchedCholi");
-            GhaghraObj = GameObject.FindGameObjectWithTag("Ghaghra");
+            Apparels[0] = GameObject.FindGameObjectWithTag("StitchedCholi");
+            Apparels[1] = GameObject.FindGameObjectWithTag("UnstitchedCholi");
+            Apparels[2] = GameObject.FindGameObjectWithTag("Ghaghra");
+            Apparels[3] = GameObject.FindGameObjectWithTag("Saree");
         }
 
         public void InvokeModelLoadedEvent() {
