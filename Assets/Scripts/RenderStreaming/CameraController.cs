@@ -93,41 +93,29 @@ using Unity.RenderStreaming;
 
         void Update()
         {
-
-            // // Rotation an zoom,pan by Mouse
-            // foreach (var mouse in listMouse)
-            // {
                 if(mouseDevice!=null){
                     if (IsMouseDragged(mouseDevice, true)){
                     LookRotationCamerabyMouse(mouseDevice.delta.ReadValue());
+                    }
+                    else{
+                    ZoomCameraByMouse(mouseDevice.scroll.ReadValue());
+                    LookRotation();
+                    }
                 }
-               
-               else{
-                   ZoomCameraByMouse(mouseDevice.scroll.ReadValue());
-                   LookRotation();
-               }
-                }
-               
-         //  }
-             // Rotation an zoom,pan by touch
-            foreach (var screen in listScreen)
-            {
+        
+                foreach (var screen in listScreen)
+                {
                 var touches = screen.GetTouches();
-                if (touches.Count() == 3)
-                {
-                    var activeTouches = touches.ToArray();
-                    PanningByTouch( activeTouches[0], activeTouches[1]);
-                }
-                else if (touches.Count() == 2)
-                {
+                     if (touches.Count() == 2)
+                    {
                     var activeTouches = touches.ToArray();
                     ZoomCameraByTouch(activeTouches[0],activeTouches[1]);
-                }else if (touches.Count() == 1)
-                {
+                    }else if (touches.Count() == 1)
+                    {
                     var activeTouches = touches.ToArray();
                     LookRotationCameraByTouch(activeTouches[0].delta);
+                    }
                 }
-            }
         
         }
 
@@ -177,16 +165,21 @@ private void LookRotationCamerabyMouse(Vector2 input){
             transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForMouse);
             LookRotation();
         }else if(renderCamera.fieldOfView < ZoomPan){
-            PanningbyMouse(mouseDevice);
-          
+            PanningbyMouse();
+
         }
      }
 }
 private void LookRotationCameraByTouch(Vector2 input){
      if(isModel) {
         inputValue = input.x;
+        if(Mathf.Abs(input.x)> Mathf.Abs(input.y)){
         transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForTouch);
-       LookRotation();
+        LookRotation();
+       }
+       else if(renderCamera.fieldOfView < ZoomPan){
+            PanningbyMouse();
+        }
      }
 }
 private void LookRotation(){
@@ -231,21 +224,21 @@ private void LookRotation(){
 
 Vector3 dragOrigin;
 
- private void PanningbyMouse(Mouse m){
+ private void PanningbyMouse(){
         
-      if(Mouse.current.leftButton.wasPressedThisFrame)
+      if(mouseDevice.leftButton.wasPressedThisFrame)
       {
-        dragOrigin = renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        dragOrigin = renderCamera.ScreenToViewportPoint(mouseDevice.position.ReadValue());
       }
 
-    if(Mouse.current.leftButton.isPressed){
-        Vector3  difference = dragOrigin - renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        Debug.Log("difference "+difference.y + "dragOrigin "+ dragOrigin + "renderCamera.ScreenToViewportPoint(m.position.ReadValue())" +renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue() ));
+    if(mouseDevice.leftButton.isPressed){
+        Vector3  difference = dragOrigin - renderCamera.ScreenToViewportPoint(mouseDevice.position.ReadValue());
+        Debug.Log("difference "+difference.y + "dragOrigin "+ dragOrigin + "renderCamera.ScreenToViewportPoint(m.position.ReadValue())" +renderCamera.ScreenToViewportPoint(mouseDevice.position.ReadValue() ));
         targetPan = transform.position.y + difference.y * panFactor;
         targetPan = Mathf.Clamp(targetPan, PanUpperLimit, PanLowerLimit);
         targetPanV3 = new Vector3(renderCamera.transform.position.x,targetPan,renderCamera.transform.position.z);
         renderCamera.transform.position = Vector3.Lerp(renderCamera.transform.position, targetPanV3, Time.deltaTime * PanLerpSpeed);
-        dragOrigin = renderCamera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        dragOrigin = renderCamera.ScreenToViewportPoint(mouseDevice.position.ReadValue());
     }
 
     }
@@ -294,7 +287,6 @@ Vector3 dragOrigin;
    void Zoom(bool zoomOut){
        currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? ZoomAmountbyTouch : -ZoomAmountbyTouch), 5f, 90f);
         renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, currentZoom, Time.deltaTime * zoomLerpSpeedByTouch);
-        Camera.main.fieldOfView = renderCamera.fieldOfView;
    }
 float MAX_DIFFERENCE = 10f;
  Vector2 startPoint = Vector2.zero;

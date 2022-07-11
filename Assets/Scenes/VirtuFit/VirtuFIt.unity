@@ -529,7 +529,7 @@ MonoBehaviour:
   RotationsSpeedForMouse: 0.25
   RotationsSpeedForTouch: 0.25
   zoomFactor: 0.1
-  zoomFactorForTouch: 0.01
+  zoomFactorForTouch: 5
   ZoomMax: 60
   ZoomMin: 5
   ZoomPan: 60
