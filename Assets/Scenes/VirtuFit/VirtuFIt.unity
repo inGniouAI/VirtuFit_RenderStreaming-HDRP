@@ -539,6 +539,7 @@ MonoBehaviour:
   PanLowerLimit: 1.7
   PanLerpSpeed: 1
   panFactor: 100
+  panFactorByTouch: 0.1
 --- !u!20 &725451154
 Camera:
   m_ObjectHideFlags: 0

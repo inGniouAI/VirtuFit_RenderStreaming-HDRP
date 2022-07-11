@@ -173,12 +173,13 @@ private void LookRotationCamerabyMouse(Vector2 input){
 private void LookRotationCameraByTouch(Vector2 input){
      if(isModel) {
         inputValue = input.x;
-        if(Mathf.Abs(input.x)> Mathf.Abs(input.y)){
+        if(Mathf.Abs(input.x)> Mathf.Abs(input.y))
+        {
         transform.RotateAround( GameManager.Instance.MyTwin.transform.position, Vector3.up, inputValue * RotationsSpeedForTouch);
         LookRotation();
        }
        else if(renderCamera.fieldOfView < ZoomPan){
-            PanningbyMouse();
+            Panning(input.y);
         }
      }
 }
@@ -195,8 +196,7 @@ private void LookRotation(){
 }
     private float targetZoom;
     public float zoomFactor = 0.01f;
-        public float zoomFactorForTouch = 0.01f;
-
+    public float zoomFactorForTouch = 0.01f;
     public float ZoomMax = 60f;
     public float ZoomMin = 5f;
     public float ZoomPan = 30f;
@@ -221,6 +221,7 @@ private void LookRotation(){
     private Vector3 targetPanV3;
     [SerializeField] private float PanLerpSpeed = 5;
     public float panFactor = 0.01f;
+    public float panFactorByTouch = 0.01f;
 
 Vector3 dragOrigin;
 
@@ -245,7 +246,7 @@ Vector3 dragOrigin;
     private void Panning(float vector2y){
         
         float DragData = vector2y;
-        targetPan -= DragData * panFactor;
+        targetPan -= DragData * panFactorByTouch;
         targetPan = Mathf.Clamp(targetPan, PanUpperLimit, PanLowerLimit);
         targetPanV3 = new Vector3(transform.position.x,targetPan,transform.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPanV3, Time.deltaTime * PanLerpSpeed);
@@ -283,9 +284,9 @@ Vector3 dragOrigin;
         lastMultiTouchDistance = newMultiTouchDistance;
     }
    
-    private const float ZoomAmountbyTouch = 0.5f;
+   // private const float ZoomAmountbyTouch = 0.5f;
    void Zoom(bool zoomOut){
-       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? ZoomAmountbyTouch : -ZoomAmountbyTouch), 5f, 90f);
+       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? zoomFactorForTouch : -zoomFactorForTouch), 5f, 90f);
         renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, currentZoom, Time.deltaTime * zoomLerpSpeedByTouch);
    }
 float MAX_DIFFERENCE = 10f;
