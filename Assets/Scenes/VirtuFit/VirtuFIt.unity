@@ -537,7 +537,7 @@ MonoBehaviour:
   zoomLerpSpeedByTouch: 5
   PanUpperLimit: -0.2
   PanLowerLimit: 1.7
-  PanLerpSpeed: 1
+  PanLerpSpeed: 3
   panFactor: 100
   panFactorByTouch: 0.1
 --- !u!20 &725451154

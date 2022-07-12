@@ -220,7 +220,7 @@ private void LookRotation(){
     public float PanLowerLimit = 1.5f;
     private Vector3 targetPanV3;
     [SerializeField] private float PanLerpSpeed = 5;
-    public float panFactor = 0.01f;
+    public float panFactor;
     public float panFactorByTouch = 0.01f;
 
 Vector3 dragOrigin;
@@ -286,7 +286,7 @@ Vector3 dragOrigin;
    
    // private const float ZoomAmountbyTouch = 0.5f;
    void Zoom(bool zoomOut){
-       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? zoomFactorForTouch : -zoomFactorForTouch), 5f, 90f);
+       currentZoom = Mathf.Clamp(currentZoom + (zoomOut ? zoomFactorForTouch : -zoomFactorForTouch),ZoomMin, ZoomMax);
         renderCamera.fieldOfView = Mathf.Lerp(renderCamera.fieldOfView, currentZoom, Time.deltaTime * zoomLerpSpeedByTouch);
    }
 float MAX_DIFFERENCE = 10f;
