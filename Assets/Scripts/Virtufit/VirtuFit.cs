@@ -57,6 +57,7 @@ public class VirtuFit : GenericSingleton<VirtuFit>
         LoadClothing();
         Animate();
         GameManager.Instance.GetReferences();
+        GameManager.Instance.MyTwin.tag = "Focus";
         DontDestroyOnLoad(GameManager.Instance.MyTwin);
         GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
         GameManager.Instance.InvokeModelLoadedEvent();

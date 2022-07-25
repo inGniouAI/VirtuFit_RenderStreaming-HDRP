@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.9727, g: 1836.0449, b: 2430.713, a: 1}
+  m_IndirectSpecularColor: {r: 1481.9102, g: 1835.9688, b: 2430.3418, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -375,11 +375,12 @@ GameObject:
   - component: {fileID: 725451155}
   - component: {fileID: 725451157}
   - component: {fileID: 725451158}
+  - component: {fileID: 725451153}
   - component: {fileID: 725451152}
   - component: {fileID: 725451151}
   m_Layer: 0
   m_Name: Render Streaming Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,7 +520,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725451149}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45310851704664c1ab56d034ce9a44b7, type: 3}
   m_Name: 
@@ -540,6 +541,34 @@ MonoBehaviour:
   PanLerpSpeed: 3
   panFactor: 100
   panFactorByTouch: 0.1
+--- !u!114 &725451153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725451149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2450af37fb79df40aeccafbbff9dabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receiver: {fileID: 725451158}
+  VirtuFitCamera: {fileID: 0}
+  Focus: {fileID: 0}
+  isLoaded: 0
+  FocusTag: Focus
+  distanceToTarget: 2
+  StartPosition: {x: 0, y: 1.25, z: 1}
+  maxRotationInOneSwipe: 180
+  maxPanInOneSwipe: 1
+  PanBounds:
+  - 0.1
+  - 1.75
+  ZoomSpeed: 0.1
+  ZoomBounds:
+  - 10
+  - 60
 --- !u!20 &725451154
 Camera:
   m_ObjectHideFlags: 0
