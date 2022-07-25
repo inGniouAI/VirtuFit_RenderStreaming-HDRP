@@ -25,7 +25,7 @@ public class VirtuFitCam : MonoBehaviour
     [SerializeField] private bool isLoaded;
     public string FocusTag = "Focus";
     [SerializeField] [Range(0, 5)] private float distanceToTarget = 1;
-    [SerializeField] private Vector3 StartPosition = new Vector3(0, 1.25f, 1);
+    [SerializeField] private Vector3 StartPosition = new Vector3(0, 1.25f);
     #endregion
 
     #region Camera Orbit Properties
@@ -35,6 +35,7 @@ public class VirtuFitCam : MonoBehaviour
     #region Camera Pan Properties
     [SerializeField] [Range(0, 1)] private float maxPanInOneSwipe = 0.25f;
     [SerializeField]private float[] PanBounds = new float[] {0, 2};
+    [SerializeField] private bool DevPan = false;
     #endregion
 
     #region Camera Zoom Properties
@@ -131,6 +132,12 @@ public class VirtuFitCam : MonoBehaviour
                 {
                     VirtuFitCamera.transform.Translate(new Vector3(0, moveAlongYAxis, 0));
                 }
+#if UNITY_EDITOR
+                if (DevPan == true)
+                {
+                    VirtuFitCamera.transform.Translate(new Vector3(0, moveAlongYAxis, 0));
+                }
+#endif
 
                 VirtuFitCamera.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
@@ -185,6 +192,7 @@ public class VirtuFitCam : MonoBehaviour
                 Control.Camera.SecondaryTrigger.canceled += _ => EndZoom();
                 Control.Camera.MouseScroll.started += _ => StartScrollZoom();
                 Control.Camera.MouseScroll.canceled += _ => EndScrollZoom();
+                StartPosition = new Vector3(StartPosition.x, StartPosition.y, distanceToTarget);
                 VirtuFitCamera.transform.position = StartPosition;
             }
         }
