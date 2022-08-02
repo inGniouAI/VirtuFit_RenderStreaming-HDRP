@@ -376,7 +376,6 @@ GameObject:
   - component: {fileID: 725451157}
   - component: {fileID: 725451158}
   - component: {fileID: 725451153}
-  - component: {fileID: 725451152}
   - component: {fileID: 725451151}
   m_Layer: 0
   m_Name: Render Streaming Camera
@@ -513,34 +512,6 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
---- !u!114 &725451152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725451149}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45310851704664c1ab56d034ce9a44b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  receiver: {fileID: 725451158}
-  renderCamera: {fileID: 725451154}
-  RotationsSpeedForMouse: 0.25
-  RotationsSpeedForTouch: 0.25
-  zoomFactor: 0.1
-  zoomFactorForTouch: 5
-  ZoomMax: 60
-  ZoomMin: 5
-  ZoomPan: 60
-  zoomLerpSpeed: 1.5
-  zoomLerpSpeedByTouch: 5
-  PanUpperLimit: -0.2
-  PanLowerLimit: 1.7
-  PanLerpSpeed: 3
-  panFactor: 100
-  panFactorByTouch: 0.1
 --- !u!114 &725451153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +536,7 @@ MonoBehaviour:
   PanBounds:
   - 0.1
   - 1.75
+  DevPan: 0
   ZoomSpeed: 0.1
   ZoomBounds:
   - 10
@@ -833,6 +805,7 @@ Transform:
   - {fileID: 1623734775}
   - {fileID: 783215604}
   - {fileID: 725451150}
+  - {fileID: 1786693359}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1178,6 +1151,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606ca4f1cfc4e4288a0836016427c9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1786693358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786693359}
+  - component: {fileID: 1786693360}
+  m_Layer: 0
+  m_Name: AWSManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1786693359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786693358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1007792475}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1786693360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786693358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6429d4de41179dc4a9d967ce258dacbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 
+  ObjectDownloaded: 0
+  S3Region: ap-south-1
 --- !u!1 &2020704064
 GameObject:
   m_ObjectHideFlags: 0

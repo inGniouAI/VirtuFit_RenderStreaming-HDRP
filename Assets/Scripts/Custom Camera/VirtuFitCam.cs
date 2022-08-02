@@ -10,6 +10,10 @@ public class VirtuFitCam : MonoBehaviour
 {
     #region RenderStreaming
     [SerializeField] private InputChannelReceiverBase receiver;
+    private List<Mouse> listMouse = new List<Mouse>();
+    private List<Touchscreen> listScreen = new List<Touchscreen>();
+    private Mouse mouseDevice;
+    private Touchscreen touchscreenDevice;
     #endregion
 
     #region Input Variables
@@ -43,6 +47,52 @@ public class VirtuFitCam : MonoBehaviour
     [SerializeField]private float[] ZoomBounds = new float[] { 10f, 60f };
     #endregion
 
+    #region RenderStreaming
+    void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        switch (change)
+        {
+            case InputDeviceChange.Added:
+                SetDevice(device);
+                return;
+            case InputDeviceChange.Removed:
+                SetDevice(device, false);
+                return;
+        }
+    }
+    void SetDevice(InputDevice device, bool add = true)
+    {
+        switch (device)
+        {
+            case Mouse mouse:
+                if (add)
+                {
+                    listMouse.Add(mouse);
+                    mouseDevice = mouse;
+                }
+                else
+                {
+                    listMouse.Remove(mouse);
+                }
+                return;
+
+            case Touchscreen screen:
+
+                if (add)
+                {
+                    listScreen.Add(screen);
+                    touchscreenDevice = screen;
+                }
+                else
+                {
+                    listScreen.Remove(screen);
+                }
+                return;
+        }
+
+    }
+    #endregion
+
     #region Private Unity Functions
     private void Awake()
     {
@@ -53,6 +103,7 @@ public class VirtuFitCam : MonoBehaviour
         //Focus = GameObject.FindGameObjectWithTag($"{FocusTag}");
         Focus = GameManager.Instance.MyTwin;
         Control = new CameraControl();
+                    receiver.onDeviceChange += OnDeviceChange;
     }
 
     private void OnEnable()
