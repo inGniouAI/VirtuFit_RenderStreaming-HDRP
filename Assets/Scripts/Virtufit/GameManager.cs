@@ -222,42 +222,11 @@ public class GameManager : GenericSingleton<GameManager>
     }
     public void UpdateAvatarDirectory()
     {
-#if UNITY_STANDALONE_LINUX
         if (!string.IsNullOrEmpty(AvatarCode))
         {
-            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
-        }
-        else
-        {
-            AvatarDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/home/arch/Documents/VirtuFit_Root/VirtuFit_Textures";
-        }
-#endif
-#if UNITY_STANDALONE_OSX
-        if (!string.IsNullOrEmpty(AvatarCode))
-        {
-            AvatarDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Textures";
-        }
-        else
-        {
-            AvatarDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-            TextureDirectory = $"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Textures";
-        }
-#endif
-#if UNITY_STANDALONE_WIN
-        if (!string.IsNullOrEmpty(AvatarCode))
-        {
-            AvatarDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/model.glb";
+            AvatarDirectory = $"avatars/{AvatarCode}/model.glb";
             TextureDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Textures";
         }
-        else
-        {
-            AvatarDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{DefaultAvatarCode}/avatar/model.glb";
-            TextureDirectory = $"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Textures";
-        }
-#endif
     }
 
         public void UpdateAvatarCode(string aNewAvatarCode = null, string aSku = null)

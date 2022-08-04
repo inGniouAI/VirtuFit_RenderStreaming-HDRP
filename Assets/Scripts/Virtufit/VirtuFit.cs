@@ -42,80 +42,62 @@ public class VirtuFit : GenericSingleton<VirtuFit>
     {
         if (GameManager.Instance.MyTwin != null)
         {
-            //Debug.LogWarning($"My Twin Model Loaded, Destorying {GameManager.Instance.MyTwin}");
-            //DestroyImmediate(GameManager.Instance.MyTwin);
             return;
         }
-        Importer.ImportGLBAsync(filepath, new ImportSettings(), OnFinishAsync);
+        AWSManager.Instance.GetS3Object(GameManager.Instance.AvatarDirectory);
+        StartCoroutine(ModelLoader());
     }
-    private void OnFinishAsync(GameObject result, AnimationClip[] clips)
+
+
+    IEnumerator ModelLoader()
     {
-        GameManager.Instance.AvatarTypeManager();
-        GameManager.Instance.MyTwin = result;
-        GameManager.Instance.MyTwin.transform.Find("mesh").gameObject.GetComponent<SkinnedMeshRenderer>().material = MyTwinSkin;;
-        LoadTextures(Texture2D_ ,MyTwinSkin);
-        LoadClothing();
-        Animate();
-        GameManager.Instance.GetReferences();
-        GameManager.Instance.MyTwin.tag = "Focus";
-        DontDestroyOnLoad(GameManager.Instance.MyTwin);
-        GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
-        GameManager.Instance.InvokeModelLoadedEvent();
+        while (AWSManager.Instance.ObjectDownloaded == false)
+        {
+            yield return null;
+        }
+        if (AWSManager.Instance.ObjectDownloaded == true)
+        {
+            if (AWSManager.Instance.data != null)
+            {
+                GameManager.Instance.MyTwin = Importer.LoadFromBytes(AWSManager.Instance.data);
+                GameManager.Instance.MyTwin.gameObject.name = "MyTwin";
+                Debug.Log($"MyTwin Is Loaded with CustomerID {GameManager.Instance.AvatarCode}");
+                GameManager.Instance.AvatarTypeManager();
+                //GameManager.Instance.MyTwin.transform.Find("mesh").gameObject.GetComponent<SkinnedMeshRenderer>().material = MyTwinSkin; ;
+                //LoadTextures(Texture2D_ ,MyTwinSkin);
+                LoadClothing();
+                Animate();
+                GameManager.Instance.GetReferences();
+                GameManager.Instance.MyTwin.tag = "Focus";
+                DontDestroyOnLoad(GameManager.Instance.MyTwin);
+                GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+                GameManager.Instance.InvokeModelLoadedEvent();
+            }
+        }
     }
+
     private void LoadTextures(Texture2D texture2D_, Material material_)
     {
-#if UNITY_STANDALONE_LINUX
-        bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
-#endif
-#if UNITY_STANDALONE_WIN
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
-#endif
-#if UNITY_STANDALONE_OSX
-          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
-#endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_7771a1994f214c8b835631c296cbab55", texture2D_);
 
-#if UNITY_STANDALONE_LINUX
-        bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
-#endif
-#if UNITY_STANDALONE_WIN
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
-#endif
-#if UNITY_STANDALONE_OSX
-          bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
-#endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_ = Texture2D.normalTexture;
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_1ff539d88fb54b39bb95cc229b5c8993", texture2D_);
 
-#if UNITY_STANDALONE_LINUX
-        bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
-#endif
-#if UNITY_STANDALONE_WIN
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
-#endif
-#if UNITY_STANDALONE_OSX
-        bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
-#endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_b61cd158220c45da82bb487c8d801bec", texture2D_);
 
-#if UNITY_STANDALONE_LINUX
-        bytes = File.ReadAllBytes($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
-#endif
-#if UNITY_STANDALONE_WIN
         bytes = File.ReadAllBytes($"C:/Users/scron/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
-#endif
-#if UNITY_STANDALONE_OSX
-         bytes = File.ReadAllBytes($"/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/Assets/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
-#endif
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
