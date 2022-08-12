@@ -93,7 +93,7 @@ public class AWSManager : MonoBehaviour
                 if (AvatarFound)
                 {
                     Debug.Log("Download Started");
-                    GetAvatar(onComplete, target, AvatarID);
+                    Download(onComplete, target, AvatarID);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ public class AWSManager : MonoBehaviour
         });
     }
 
-    public void GetAvatar(Action OnComplete, string target, string AvatarID)
+    public void Download(Action OnComplete, string target, string AvatarID)
     {
         S3Client.GetObjectAsync("aws-virtufit-app-bucket", target, (responseObject) =>
         {
@@ -134,6 +134,7 @@ public class AWSManager : MonoBehaviour
                             Debug.Log("Download Completed");
                         }
                     }
+                    if (OnComplete != null) OnComplete();
                 }
             }
         });

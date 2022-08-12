@@ -5,6 +5,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using Newtonsoft.Json;
+using System.Text;
 
 public enum GameState
 { 
@@ -50,18 +52,20 @@ public class GameManager : GenericSingleton<GameManager>
     #region Hidden Public Variables
     [HideInInspector] public string AvatarDirectory = null;
     [HideInInspector] public AvatarType GlobalAvatarType;
-
+    public DataClass dataClass;
+    public Avatars avatars;
+    public Apparels apparels;
     [HideInInspector] public string TextureDirectory = null;
     [HideInInspector] public string TextureID = null;
     [HideInInspector] public string DefaultTextureID = "144";
     [HideInInspector] public string DefaultAvatarCode = "0001";
     [SerializeField] public GameObject[] Apparels;
     [SerializeField] public Material[] ApparelTextures;
+    [SerializeField] public bool TexturesLoaded = false;
     [SerializeField] public bool AnimationState;
 
     [HideInInspector] public GameObject MyTwin = null;
     [HideInInspector] public string AvatarCode = null;
-
 
     [HideInInspector] public GameState GlobalGameState;
     [HideInInspector] public ProductType GlobalProductType;
@@ -81,64 +85,83 @@ public class GameManager : GenericSingleton<GameManager>
                 SceneManager.LoadScene("VirtuFit");
                 break;
             case GameState.Simulation:
-                AparelManager();
                 SceneManager.LoadScene($"Ballroom_{id.ToString()}");
                 break;
         }
         #endregion
     }
 
-    private void AparelManager()
+    public IEnumerator AparelManager()
     {
-        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_1_stitched_diffused.png"))
+        if (dataClass.apparels.type == "ghagra" && dataClass.apparels.sub_type == "stitched")
         {
             UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndGhaghra);
             MyTwin.GetComponent<Animator>().enabled = true;
             Debug.Log($"{GlobalProductType}");
+            StartCoroutine(LoadTextures(TextureID, "1_stitched", Texture2D_, ApparelTextures[0]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            TexturesLoaded = true;
         }
-        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_1_unstitched_diffused.png"))
+        if (dataClass.apparels.type == "ghagra" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
             MyTwin.GetComponent<Animator>().enabled = true;
             Debug.Log($"{GlobalProductType}");
+            StartCoroutine(LoadTextures(TextureID, "1_unstitched", Texture2D_, ApparelTextures[1]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            TexturesLoaded = true;
         }
-        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_S1_stitched_diffused.png"))
+        if (dataClass.apparels.type == "saree" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndSaree);
             MyTwin.GetComponent<Animator>().enabled = false;
             Debug.Log($"{GlobalProductType}");
+            StartCoroutine(LoadTextures(TextureID, "S1_stitched", Texture2D_, ApparelTextures[0]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            TexturesLoaded = true;
         }
-        if (File.Exists($"{TextureDirectory}/{TextureID}/{TextureID}_S1_unstitched_diffused.png"))
+        if (dataClass.apparels.type == "saree" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndSaree);
             MyTwin.GetComponent<Animator>().enabled = false;
             Debug.Log($"{GlobalProductType}");
+            StartCoroutine(LoadTextures(TextureID, "S1_unstitched", Texture2D_, ApparelTextures[1]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]));
+            yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+            TexturesLoaded = true;
         }
     }
 
     public void AvatarTypeManager()
     {
-        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/XS.txt"))
+        if (dataClass.avatars.size == "xs")
         {
             UpdateAvatarType(GlobalAvatarType = AvatarType.ExtraSmall);
             Debug.Log($"{GlobalAvatarType}");
         }
-        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/S.txt"))
+        if (dataClass.avatars.size == "s")
         {
             UpdateAvatarType(GlobalAvatarType = AvatarType.Small);
             Debug.Log($"{GlobalAvatarType}");
         }
-        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/M.txt"))
+        if (dataClass.avatars.size == "m")
         {
             UpdateAvatarType(GlobalAvatarType = AvatarType.Medium);
             Debug.Log($"{GlobalAvatarType}");
         }
-        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/L.txt"))
+        if (dataClass.avatars.size == "l")
         {
             UpdateAvatarType(GlobalAvatarType = AvatarType.Large);
             Debug.Log($"{GlobalAvatarType}");
         }
-        if (File.Exists($"/home/arch/Documents/VirtuFit_Root/VirtuFit_Models/{AvatarCode}/avatar/XL.txt"))
+        if (dataClass.avatars.size == "xl")
         {
             UpdateAvatarType(GlobalAvatarType = AvatarType.ExtraLarge);
             Debug.Log($"{GlobalAvatarType}");
@@ -171,32 +194,24 @@ public class GameManager : GenericSingleton<GameManager>
         switch (newProductType)
         {
             case ProductType.StitchedCholiAndGhaghra:
-                LoadTextures(TextureID, "1_stitched", Texture2D_, ApparelTextures[0]);
-                LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]);
                 Apparels[0].SetActive(true);
                 Apparels[2].SetActive(true);
                 Apparels[1].SetActive(false);
                 Apparels[3].SetActive(false);
                 break;
             case ProductType.UnstitchedCholiAndGhaghra:
-                LoadTextures(TextureID, "1_unstitched", Texture2D_, ApparelTextures[1]);
-                LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]);
                 Apparels[1].SetActive(true);
                 Apparels[2].SetActive(true);
                 Apparels[0].SetActive(false);
                 Apparels[3].SetActive(false);
                 break;
             case ProductType.StitchedCholiAndSaree:
-                LoadTextures(TextureID, "S1_stitched", Texture2D_, ApparelTextures[0]);
-                LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]);
                 Apparels[0].SetActive(true);
                 Apparels[3].SetActive(true);
                 Apparels[2].SetActive(false);
                 Apparels[1].SetActive(false);
                 break;
             case ProductType.UnstitchedCholiAndSaree:
-                LoadTextures(TextureID, "S1_unstitched", Texture2D_, ApparelTextures[1]);
-                LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]);
                 Apparels[1].SetActive(true);
                 Apparels[3].SetActive(true);
                 Apparels[0].SetActive(false);
@@ -205,27 +220,24 @@ public class GameManager : GenericSingleton<GameManager>
         }
     }
 
-    public void LoadTextures(string code, string subCode, Texture2D texture2D_, Material material_)
+    IEnumerator LoadTextures(string code, string subCode, Texture2D texture2D_, Material material_)
     {
-        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_diffused.png");
+        AWSManager.Instance.GetS3Object($"{TextureDirectory}/{code}_{subCode}_diffused.png");
+        yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+        bytes = AWSManager.Instance.data;
         texture2D_ = new Texture2D(2, 2);
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac", texture2D_);
-        Debug.Log(texture2D_);
-
-        bytes = File.ReadAllBytes($"{TextureDirectory}/{code}/{code}_{subCode}_normal.png");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("Texture2D_223d41bb0338467abb2b4c71b5026b14", texture2D_);
+        Debug.Log(texture2D_); 
     }
+
     public void UpdateAvatarDirectory()
     {
         if (!string.IsNullOrEmpty(AvatarCode))
         {
             AvatarDirectory = $"avatars/{AvatarCode}/model.glb";
-            TextureDirectory = $"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Textures";
+            TextureDirectory = $"apparels/{TextureID}";
         }
     }
 
@@ -270,4 +282,38 @@ public class GameManager : GenericSingleton<GameManager>
                 ModelLoadedEvent.Invoke();
             }
         }
+    #region Json Reader
+    public IEnumerator LoadJsonData(string AvatarCode, string ApparelID)
+    {
+        AWSManager.Instance.GetS3Object($"avatars/{AvatarCode}/metadata.json");
+        StartCoroutine(LoadAvatarJson());
+        yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+        AWSManager.Instance.GetS3Object($"apparels/{ApparelID}/metadata.json");
+        StartCoroutine(LoadTextureJson());
     }
+
+    IEnumerator LoadAvatarJson()
+    {
+        yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+        string json = Encoding.UTF8.GetString(AWSManager.Instance.data);
+        Avatars avatarData = JsonConvert.DeserializeObject<Avatars>(json);
+        Debug.LogWarning($"The Current Avatar Is {avatarData.size} and its weight is {avatarData.weight}");
+        dataClass.avatars.size = avatarData.size;
+        dataClass.avatars.weight = avatarData.weight;
+        AvatarTypeManager();
+    }
+
+    IEnumerator LoadTextureJson()
+    {
+        yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+        string json = Encoding.UTF8.GetString(AWSManager.Instance.data);
+        Apparels apparelData = JsonConvert.DeserializeObject<Apparels>(json);
+        Debug.LogWarning($"The Current Apparel Is {apparelData.type} and its subtype is {apparelData.sub_type}");
+        dataClass.apparels.type = apparelData.type;
+        dataClass.apparels.sub_type = apparelData.sub_type;
+        StartCoroutine(GameManager.Instance.AparelManager());
+    }
+    #endregion
+}
+
+

@@ -51,57 +51,20 @@ public class VirtuFit : GenericSingleton<VirtuFit>
 
     IEnumerator ModelLoader()
     {
-        while (AWSManager.Instance.ObjectDownloaded == false)
-        {
-            yield return null;
-        }
-        if (AWSManager.Instance.ObjectDownloaded == true)
-        {
-            if (AWSManager.Instance.data != null)
-            {
-                GameManager.Instance.MyTwin = Importer.LoadFromBytes(AWSManager.Instance.data);
-                GameManager.Instance.MyTwin.gameObject.name = "MyTwin";
-                Debug.Log($"MyTwin Is Loaded with CustomerID {GameManager.Instance.AvatarCode}");
-                GameManager.Instance.AvatarTypeManager();
-                //GameManager.Instance.MyTwin.transform.Find("mesh").gameObject.GetComponent<SkinnedMeshRenderer>().material = MyTwinSkin; ;
-                //LoadTextures(Texture2D_ ,MyTwinSkin);
-                LoadClothing();
-                Animate();
-                GameManager.Instance.GetReferences();
-                GameManager.Instance.MyTwin.tag = "Focus";
-                DontDestroyOnLoad(GameManager.Instance.MyTwin);
-                GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
-                GameManager.Instance.InvokeModelLoadedEvent();
-            }
-        }
-    }
-
-    private void LoadTextures(Texture2D texture2D_, Material material_)
-    {
-        bytes = File.ReadAllBytes($"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/model.jpg");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("Texture2D_7771a1994f214c8b835631c296cbab55", texture2D_);
-
-        bytes = File.ReadAllBytes($"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/normal_map.png");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_ = Texture2D.normalTexture;
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("Texture2D_1ff539d88fb54b39bb95cc229b5c8993", texture2D_);
-
-        bytes = File.ReadAllBytes($"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/metallic_map.png");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("Texture2D_b61cd158220c45da82bb487c8d801bec", texture2D_);
-
-        bytes = File.ReadAllBytes($"C:/Users/inGnious AI Pvt Ltd/Documents/VirtuFit_Root/VirtuFit_Models/{GameManager.Instance.AvatarCode}/avatar/roughness_map.png");
-        texture2D_ = new Texture2D(2, 2);
-        texture2D_.hideFlags = HideFlags.HideAndDontSave;
-        texture2D_.LoadImage(bytes);
-        material_.SetTexture("Texture2D_dfec8faf3ce74a1bbfedfb6b7f16f8f9", texture2D_);
+         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
+         GameManager.Instance.MyTwin = Importer.LoadFromBytes(AWSManager.Instance.data);
+         GameManager.Instance.MyTwin.gameObject.name = "MyTwin";
+         Debug.Log($"MyTwin Is Loaded with CustomerID {GameManager.Instance.AvatarCode}");
+         StartCoroutine(GameManager.Instance.LoadJsonData(GameManager.Instance.AvatarCode, GameManager.Instance.TextureID));
+         yield return new WaitWhile(() => AWSManager.Instance.ObjectDownloaded == true);
+         LoadClothing();
+         Animate();
+         GameManager.Instance.GetReferences();
+         GameManager.Instance.MyTwin.tag = "Focus";
+         DontDestroyOnLoad(GameManager.Instance.MyTwin);
+         yield return new WaitWhile(() => GameManager.Instance.TexturesLoaded == true);
+         GameManager.Instance.InvokeModelLoadedEvent();
+         GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
     }
     #endregion
 
