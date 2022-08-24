@@ -61,7 +61,8 @@ public class GameManager : GenericSingleton<GameManager>
     [HideInInspector] public string DefaultAvatarCode = "0001";
     [SerializeField] public GameObject[] Apparels;
     [SerializeField] public Material[] ApparelTextures;
-    [SerializeField] public bool TexturesLoaded = false;
+    [SerializeField] public bool Textures1 = false;
+    [SerializeField] public bool Textures2 = false;
     [SerializeField] public bool AnimationState;
 
     [HideInInspector] public GameObject MyTwin = null;
@@ -98,44 +99,55 @@ public class GameManager : GenericSingleton<GameManager>
             UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndGhaghra);
             MyTwin.GetComponent<Animator>().enabled = true;
             Debug.Log($"{GlobalProductType}");
-            StartCoroutine(LoadTextures(TextureID, "1_stitched", Texture2D_, ApparelTextures[0]));
+            StartCoroutine(LoadTextures(TextureID, "1_stitched", Texture2D_, ApparelTextures[0], Textures1));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]));
+            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2], Textures2));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            TexturesLoaded = true;
+            yield return new WaitUntil(() => ApparelTextures[0].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            yield return new WaitUntil(() => ApparelTextures[2].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
         }
         if (dataClass.apparels.type == "ghagra" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndGhaghra);
             MyTwin.GetComponent<Animator>().enabled = true;
             Debug.Log($"{GlobalProductType}");
-            StartCoroutine(LoadTextures(TextureID, "1_unstitched", Texture2D_, ApparelTextures[1]));
+            StartCoroutine(LoadTextures(TextureID, "1_unstitched", Texture2D_, ApparelTextures[1], Textures1));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2]));
+            StartCoroutine(LoadTextures(TextureID, "2", Texture2D_, ApparelTextures[2], Textures2));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            TexturesLoaded = true;
+            yield return new WaitUntil(() => ApparelTextures[1].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            yield return new WaitUntil(() => ApparelTextures[2].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+
         }
         if (dataClass.apparels.type == "saree" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.StitchedCholiAndSaree);
             MyTwin.GetComponent<Animator>().enabled = false;
             Debug.Log($"{GlobalProductType}");
-            StartCoroutine(LoadTextures(TextureID, "S1_stitched", Texture2D_, ApparelTextures[0]));
+            StartCoroutine(LoadTextures(TextureID, "S1_stitched", Texture2D_, ApparelTextures[0], Textures1));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]));
+            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3], Textures2));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            TexturesLoaded = true;
+            yield return new WaitUntil(() => ApparelTextures[0].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            yield return new WaitUntil(() => ApparelTextures[3].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+
         }
         if (dataClass.apparels.type == "saree" && dataClass.apparels.sub_type == "unstitched")
         {
             UpdateProductType(GlobalProductType = ProductType.UnstitchedCholiAndSaree);
             MyTwin.GetComponent<Animator>().enabled = false;
             Debug.Log($"{GlobalProductType}");
-            StartCoroutine(LoadTextures(TextureID, "S1_unstitched", Texture2D_, ApparelTextures[1]));
+            StartCoroutine(LoadTextures(TextureID, "S1_unstitched", Texture2D_, ApparelTextures[1], Textures1));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3]));
+            StartCoroutine(LoadTextures(TextureID, "3", Texture2D_, ApparelTextures[3], Textures2));
             yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-            TexturesLoaded = true;
+            yield return new WaitUntil(() => ApparelTextures[1].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            yield return new WaitUntil(() => ApparelTextures[3].GetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac") != null);
+            GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
+
         }
     }
 
@@ -220,7 +232,7 @@ public class GameManager : GenericSingleton<GameManager>
         }
     }
 
-    IEnumerator LoadTextures(string code, string subCode, Texture2D texture2D_, Material material_)
+    IEnumerator LoadTextures(string code, string subCode, Texture2D texture2D_, Material material_, bool ApparelDownloaded)
     {
         AWSManager.Instance.GetS3Object($"{TextureDirectory}/{code}_{subCode}_diffused.png");
         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
@@ -229,7 +241,9 @@ public class GameManager : GenericSingleton<GameManager>
         texture2D_.hideFlags = HideFlags.HideAndDontSave;
         texture2D_.LoadImage(bytes);
         material_.SetTexture("Texture2D_6ad6f414dfb74c20ae5d06011f2ba9ac", texture2D_);
-        Debug.Log(texture2D_); 
+        Debug.Log(texture2D_);
+        if(texture2D_ != null)
+        ApparelDownloaded = true;
     }
 
     public void UpdateAvatarDirectory()

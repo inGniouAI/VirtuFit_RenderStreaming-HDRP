@@ -462,7 +462,7 @@ MonoBehaviour:
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
   volumeAnchorOverride: {fileID: 0}
   antialiasing: 1
   SMAAQuality: 2
@@ -565,7 +565,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10000
+  far clip plane: 100.1
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64875cfea3598b9419edac2dbbce0413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamingSize: {x: 1080, y: 1920}
+  streamingSize: {x: 720, y: 1280}
   depth: 24
   antiAliasing: 8
 --- !u!114 &725451157
@@ -1149,16 +1149,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://43.204.221.102
+  urlSignaling: ws://65.1.41.55:8228
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
   - credential: ingnious
     credentialType: 0
     urls:
-    - stun:43.204.221.102:3478
+    - stun:65.1.41.55:3478
     username: arch
   interval: 5
-  hardwareEncoderSupport: 1
+  hardwareEncoderSupport: 0
   handlers:
   - {fileID: 1623734774}
   runOnAwake: 0
@@ -1321,7 +1321,7 @@ PrefabInstance:
       objectReference: {fileID: 1623734776}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingAddress
-      value: localhost:8000
+      value: 65.1.41.55:8228/
       objectReference: {fileID: 0}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingSecured

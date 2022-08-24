@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/VirtuFit/VirtuFIt.unity
+    guid: 01b73efbdc2787e4aa7039f9592be415
   - enabled: 1
     path: Assets/Scenes/Ballroom/Ballroom_0.unity
     guid: 933ddfd13a005d7449d20d3073f98699

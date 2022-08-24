@@ -62,9 +62,7 @@ public class VirtuFit : GenericSingleton<VirtuFit>
          GameManager.Instance.GetReferences();
          GameManager.Instance.MyTwin.tag = "Focus";
          DontDestroyOnLoad(GameManager.Instance.MyTwin);
-         yield return new WaitWhile(() => GameManager.Instance.TexturesLoaded == true);
          GameManager.Instance.InvokeModelLoadedEvent();
-         GameManager.Instance.UpdateGameState(GameManager.Instance.GlobalGameState = GameState.Simulation);
     }
     #endregion
 

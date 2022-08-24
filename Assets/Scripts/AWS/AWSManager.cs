@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.IO;
 using Siccity.GLTFUtility;
+using System.Collections;
 
 public class AWSManager : MonoBehaviour
 {
@@ -93,7 +94,7 @@ public class AWSManager : MonoBehaviour
                 if (AvatarFound)
                 {
                     Debug.Log("Download Started");
-                    Download(onComplete, target, AvatarID);
+                   StartCoroutine(Download(onComplete, target, AvatarID));
                 }
                 else
                 {
@@ -107,7 +108,7 @@ public class AWSManager : MonoBehaviour
         });
     }
 
-    public void Download(Action OnComplete, string target, string AvatarID)
+    IEnumerator Download(Action OnComplete, string target, string AvatarID)
     {
         S3Client.GetObjectAsync("aws-virtufit-app-bucket", target, (responseObject) =>
         {
@@ -138,6 +139,7 @@ public class AWSManager : MonoBehaviour
                 }
             }
         });
+        yield return null;
     }
     #endregion
 }
