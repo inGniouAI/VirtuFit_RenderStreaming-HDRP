@@ -120,6 +120,16 @@ public class VirtuFitCam : MonoBehaviour
     {
         GameManager.Instance.ModelLoadedEvent.AddListener(ModelLoaded);
     }
+
+    private void LateUpdate()
+    {
+        if (Focus != null)
+        {
+            VirtuFitCamera.transform.position = new Vector3(Focus.transform.position.x, Mathf.Clamp((VirtuFitCamera.transform.position.y), PanBounds[0], PanBounds[1]), Focus.transform.position.z);
+            VirtuFitCamera.transform.Rotate(new Vector3(0, 1, 0), 0, Space.World); 
+            VirtuFitCamera.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+        }
+    }
     #endregion
 
     #region Function Trigger States
