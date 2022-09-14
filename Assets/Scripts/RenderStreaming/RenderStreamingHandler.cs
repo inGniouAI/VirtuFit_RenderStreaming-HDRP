@@ -64,7 +64,7 @@ public class RenderStreamingHandler : GenericSingleton<RenderStreamingHandler>
                     case SignalingTypeEnum.WebSocket:
                     {
                         var schema = signalingSecured ? "wss" : "ws";
-                        return new WebSocketSignaling(
+                        return new WebSocketSignalingCustom(
                             $"{schema}://{signalingAddress}", signalingInterval, SynchronizationContext.Current);
                     }
                     case SignalingTypeEnum.Http:
