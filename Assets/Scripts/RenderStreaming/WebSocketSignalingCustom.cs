@@ -129,7 +129,6 @@ namespace Unity.RenderStreaming.Signaling
             RoutedMessage<DescData> routedMessage = new RoutedMessage<DescData>();
             routedMessage.data = data;
             routedMessage.type = "CustomEvent";
-            Debug.LogWarning("DynamoDB Update Triggered");
 
             WSSend(routedMessage);
         }
@@ -261,6 +260,7 @@ namespace Unity.RenderStreaming.Signaling
         private void WSConnected(object sender, EventArgs e)
         {
             CustomEventTrigger();
+            Debug.LogWarning("DynamoDB Update Triggered");
             Debug.Log("Signaling: WS connected.");
             m_mainThreadContext.Post(d => OnStart?.Invoke(this), null);
         }
