@@ -166,7 +166,7 @@ public class VirtuFit : GenericSingleton<VirtuFit>
                         case "Ghaghra":
                             Instantiate(source, destination);
                             break;
-                        case "Ghaghra_Collider":
+                        case "Ghagra_Collider":
                             Instantiate(source, destination);
                             break;
                         case "Saree":

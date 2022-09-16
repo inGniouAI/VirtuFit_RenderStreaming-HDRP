@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.9727, g: 1836.0449, b: 2430.713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1194,13 +1194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://65.1.41.55:8228
+  urlSignaling: ws://13.234.185.150:8558
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
   - credential: ingnious
     credentialType: 0
     urls:
-    - stun:65.1.41.55:3478
+    - stun:13.234.185.150:3478
     username: arch
   interval: 5
   hardwareEncoderSupport: 0
@@ -1386,7 +1386,7 @@ PrefabInstance:
       objectReference: {fileID: 1623734776}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingAddress
-      value: 65.1.41.55:8228/
+      value: 13.234.185.150:8558
       objectReference: {fileID: 0}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingSecured
