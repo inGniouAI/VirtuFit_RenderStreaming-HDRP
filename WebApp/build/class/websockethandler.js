@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onAnalytic = exports.onRestartUnityapp = exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
+exports.onAnalytic = exports.makeStatusReady = exports.onCandidate = exports.onAnswer = exports.onOffer = exports.onDisconnect = exports.onConnect = exports.remove = exports.add = exports.reset = exports.SetIpPort = exports.modify = void 0;
 var offer_1 = require("./offer");
 var answer_1 = require("./answer");
 var candidate_1 = require("./candidate");
@@ -213,7 +213,7 @@ function onAnalytic(ws, message) {
 }
 exports.onAnalytic = onAnalytic;
 var exec = require('child_process').execFile;
-function onRestartUnityapp() {
+function makeStatusReady() {
     console.log("fun() start");
     exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function (err, data) {
         console.log(err);
@@ -221,7 +221,7 @@ function onRestartUnityapp() {
     });
     modify(Ipport);
 }
-exports.onRestartUnityapp = onRestartUnityapp;
+exports.makeStatusReady = makeStatusReady;
 var Ipport;
 function SetIpPort(ipport) {
     Ipport = ipport;

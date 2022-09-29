@@ -51,7 +51,7 @@ var WSSignaling = /** @class */ (function () {
                     case "CustomEvent":
                         console.log("time to restart unity");
                         setTimeout(function () {
-                            handler.onRestartUnityapp();
+                            handler.makeStatusReady();
                         }, 2000);
                         //  handler.onConnect(ws, msg.connectionId);
                         break;

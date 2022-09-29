@@ -15,11 +15,12 @@ export function modify (ipport) {
     // if(isfromLocal){
     //   return;
     // }
+    ipport = "13.234.185.150:8558";
     var params = {
-        TableName: "ListOfInstances",
-        Key: { "Ip_port": ipport },
+        TableName: "Servers-inGnious-Demo",
+        Key: { "ip": ipport },
         UpdateExpression: "set instance_status = :bystatus",
-        ConditionExpression: 'attribute_exists(Ip_port)',
+        ConditionExpression: 'attribute_exists(ip)',
         ExpressionAttributeValues: {
             ":bystatus": "Ready"
         },
@@ -233,19 +234,19 @@ function onAnalytic(ws: WebSocket, message: any): void {
   console.log("sku "+sku);
   SetAnalytic(dateTimeId,avatarCode,sku,totalTimeSpent,ipv4);
 }
-//var exec = require('child_process').execFile;
 
-//function onRestartUnityapp(): void {
+
+function makeStatusReady(): void {
  // console.log("fun() start");
   //exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
     //   console.log(err)
       // console.log(data.toString());                       
    //});  
-   //modify(Ipport);
-//}
+   modify(Ipport);
+}
 
 let Ipport;
 export function SetIpPort(ipport){
   Ipport = ipport;
 }
-export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate, onRestartUnityapp, onAnalytic };
+export { reset, add, remove, onConnect, onDisconnect, onOffer, onAnswer, onCandidate, makeStatusReady, onAnalytic };
