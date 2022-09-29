@@ -163,11 +163,11 @@ export class VirtualFitReceiver {
 
 
     });
-    this.pc.addEventListener('sendCustomEvent', (e) => {
-      const offer = e.detail;
-      _this.signaling.sendCustomEvent(offer.connectionId, offer.sdp);
-      console.log("sendCustomEvent ");
-    });
+   // this.pc.addEventListener('sendCustomEvent', (e) => {
+     // const offer = e.detail;
+      //_this.signaling.sendCustomEvent(offer.connectionId, offer.sdp);
+      //console.log("sendCustomEvent ");
+    //});
     this.pc.addEventListener('sendAnalytic', (e) => {
       const analytic = e.detail;
       _this.signaling.sendAnalytic(analytic.connectionId,analytic.dateTimeId, analytic.sku, analytic.avatarCode,analytic.ipv4,analytic.totalTimeSpent);
@@ -317,7 +317,7 @@ export class VirtualFitReceiver {
     if (this.pc != null) {
       console.log("Stop Window");
       this.pc.dispatchEvent(new CustomEvent('sendAnalytic', { detail: { connectionId: this.connectionId,dateTimeId:analyticDatetime, sku: SkuCode, avatarCode:AvatarCode,  ipv4:analyticIps, totalTimeSpent:analyticTotalSpenttime} }));
-      this.pc.dispatchEvent(new CustomEvent('sendCustomEvent', { detail: { connectionId: this.connectionId } }));
+     // this.pc.dispatchEvent(new CustomEvent('sendCustomEvent', { detail: { connectionId: this.connectionId } }));
 
     }
     if (this.signaling) {

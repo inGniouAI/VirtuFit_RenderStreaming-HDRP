@@ -59,13 +59,13 @@ export default class WSSignaling {
             console.log("candidate from websocket");
             handler.onCandidate(ws, msg.data);
             break;
-          case "CustomEvent":
-            console.log("time to restart unity");
-            setTimeout(function(){
-                handler.onRestartUnityapp();
-            }, 2000); 
+         // case "CustomEvent":
+           // console.log("time to restart unity");
+            //setTimeout(function(){
+              //  handler.onRestartUnityapp();
+            //}, 2000); 
             //  handler.onConnect(ws, msg.connectionId);
-            break;
+            //break;
           case "analytic":
             console.log("Analytic");
             handler.onAnalytic(ws, msg.data);

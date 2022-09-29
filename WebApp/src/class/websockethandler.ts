@@ -45,7 +45,7 @@ export function modify (ipport) {
           ":avatarCode": avatarCode,
           ":sku": sku,
           ":totalTimeSpent": totalTimeSpent,
-          ":ipv4": ipv4
+          ":ipv4": ready
 
       },
       ReturnValues: "UPDATED_NEW"
@@ -233,16 +233,16 @@ function onAnalytic(ws: WebSocket, message: any): void {
   console.log("sku "+sku);
   SetAnalytic(dateTimeId,avatarCode,sku,totalTimeSpent,ipv4);
 }
-var exec = require('child_process').execFile;
+//var exec = require('child_process').execFile;
 
-function onRestartUnityapp(): void {
-  console.log("fun() start");
-  exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
-       console.log(err)
-       console.log(data.toString());                       
-   });  
-   modify(Ipport);
-}
+//function onRestartUnityapp(): void {
+ // console.log("fun() start");
+  //exec('/Users/hetalchirag/InGnious/VirtuFit_RenderStreaming-HDRP/test.app/Contents/MacOS/VirtuFit_HDRP_RenderStreaming', function(err, data) {  
+    //   console.log(err)
+      // console.log(data.toString());                       
+   //});  
+   //modify(Ipport);
+//}
 
 let Ipport;
 export function SetIpPort(ipport){

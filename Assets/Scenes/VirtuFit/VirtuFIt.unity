@@ -1194,13 +1194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://13.234.185.150:8558
+  urlSignaling: ws://65.0.196.33:8118
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
   - credential: ingnious
     credentialType: 0
     urls:
-    - stun:13.234.185.150:3478
+    - stun:65.0.196.33:3478
     username: arch
   interval: 5
   hardwareEncoderSupport: 0
@@ -1386,7 +1386,7 @@ PrefabInstance:
       objectReference: {fileID: 1623734776}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingAddress
-      value: 13.234.185.150:8558
+      value: 65.0.196.33:8118
       objectReference: {fileID: 0}
     - target: {fileID: 370760243, guid: 4e7477785aa9efb42abb74f91be12cc8, type: 3}
       propertyPath: signalingSecured
