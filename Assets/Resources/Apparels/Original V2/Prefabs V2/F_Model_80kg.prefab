@@ -3857,7 +3857,7 @@ Cloth:
   - {fileID: 2592837658309466166}
   - {fileID: 6083579363171587493}
   - {fileID: 2910064549569891375}
-  - {fileID: 1213056750882675916}
+  - {fileID: 0}
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
@@ -4988,8 +4988,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.09788159
+  m_Height: 0.3930202
   m_Direction: 1
   m_Center: {x: -0.04448661, y: -0.1644542, z: 0.001059204}
 --- !u!1 &8971255152752541497
@@ -5094,7 +5094,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9194116747780852335}
-  - component: {fileID: 1213056750882675916}
   m_Layer: 0
   m_Name: Spine1
   m_TagString: Untagged
@@ -5117,20 +5116,6 @@ Transform:
   m_Father: {fileID: 6059505921408146969}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1213056750882675916
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097131585488009590}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8309938586944912445
 PrefabInstance:
   m_ObjectHideFlags: 0

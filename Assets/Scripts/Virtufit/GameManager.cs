@@ -297,17 +297,9 @@ public class GameManager : GenericSingleton<GameManager>
             }
         }
     #region Json Reader
-    public IEnumerator LoadJsonData(string AvatarCode, string ApparelID)
+    public IEnumerator LoadAvatarJson()
     {
         AWSManager.Instance.GetS3Object($"avatars/{AvatarCode}/metadata.json");
-        StartCoroutine(LoadAvatarJson());
-        yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
-        AWSManager.Instance.GetS3Object($"apparels/{ApparelID}/metadata.json");
-        StartCoroutine(LoadTextureJson());
-    }
-
-    IEnumerator LoadAvatarJson()
-    {
         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
         string json = Encoding.UTF8.GetString(AWSManager.Instance.data);
         Avatars avatarData = JsonConvert.DeserializeObject<Avatars>(json);
@@ -317,15 +309,15 @@ public class GameManager : GenericSingleton<GameManager>
         AvatarTypeManager();
     }
 
-    IEnumerator LoadTextureJson()
+    public IEnumerator LoadTextureJson()
     {
+        AWSManager.Instance.GetS3Object($"apparels/{TextureID}/metadata.json");
         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
         string json = Encoding.UTF8.GetString(AWSManager.Instance.data);
         Apparels apparelData = JsonConvert.DeserializeObject<Apparels>(json);
         Debug.LogWarning($"The Current Apparel Is {apparelData.type} and its subtype is {apparelData.sub_type}");
         dataClass.apparels.type = apparelData.type;
         dataClass.apparels.sub_type = apparelData.sub_type;
-        StartCoroutine(GameManager.Instance.AparelManager());
     }
     #endregion
 }

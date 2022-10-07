@@ -53,13 +53,16 @@ public class VirtuFit : GenericSingleton<VirtuFit>
     {
          yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
          GameManager.Instance.MyTwin = Importer.LoadFromBytes(AWSManager.Instance.data);
+         StartCoroutine(GameManager.Instance.LoadAvatarJson());
+         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true); 
+         StartCoroutine(GameManager.Instance.LoadTextureJson());
+         yield return new WaitUntil(() => AWSManager.Instance.ObjectDownloaded == true);
          GameManager.Instance.MyTwin.gameObject.name = "MyTwin";
          Debug.Log($"MyTwin Is Loaded with CustomerID {GameManager.Instance.AvatarCode}");
-         StartCoroutine(GameManager.Instance.LoadJsonData(GameManager.Instance.AvatarCode, GameManager.Instance.TextureID));
-         yield return new WaitWhile(() => AWSManager.Instance.ObjectDownloaded == true);
-         LoadClothing();
          Animate();
+         LoadClothing();
          GameManager.Instance.GetReferences();
+         StartCoroutine(GameManager.Instance.AparelManager());
          GameManager.Instance.MyTwin.tag = "Focus";
          DontDestroyOnLoad(GameManager.Instance.MyTwin);
          GameManager.Instance.InvokeModelLoadedEvent();
@@ -221,7 +224,7 @@ public class VirtuFit : GenericSingleton<VirtuFit>
         if (AvatarType.Medium == GameManager.Instance.GlobalAvatarType)
             anim.runtimeAnimatorController = Resources.Load("Animation/Virtufit_Genric") as RuntimeAnimatorController;
         if (AvatarType.Large == GameManager.Instance.GlobalAvatarType)
-            anim.runtimeAnimatorController = Resources.Load("Animation/Virtufit_Genric") as RuntimeAnimatorController;
+            anim.runtimeAnimatorController = Resources.Load("Animation/Virtufit_XL") as RuntimeAnimatorController;
         if (AvatarType.ExtraLarge == GameManager.Instance.GlobalAvatarType)
             anim.runtimeAnimatorController = Resources.Load("Animation/Virtufit_XL") as RuntimeAnimatorController;
     }

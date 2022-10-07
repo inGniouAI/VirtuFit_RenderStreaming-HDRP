@@ -131,11 +131,11 @@ public class AWSManager : MonoBehaviour
                             }
                             data = memory.ToArray();
                             Debug.Log($"File Size is {data.Length/1024/1024} MB");
-                            ObjectDownloaded = true;
                             Debug.Log("Download Completed");
                         }
                     }
                     if (OnComplete != null) OnComplete();
+                            ObjectDownloaded = true;
                 }
             }
         });
