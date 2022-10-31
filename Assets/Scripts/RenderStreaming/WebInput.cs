@@ -61,7 +61,7 @@ public class WebInput : WebBrowserInputChannelReceiver
                      Debug.Log("Substring:"+$"{sub}");
                 }
                     GameManager.Instance.UpdateAvatarCode(subs[0],subs[1]);    
-                    VirtuFit.Instance.ImportGLBAsync(GameManager.Instance.AvatarDirectory);
+                    VirtuFit.Instance.ImportGLBAsync();
                break;
 
                 case EventType.EnvironmentInput:

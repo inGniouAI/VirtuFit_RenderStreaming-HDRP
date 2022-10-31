@@ -34,11 +34,16 @@ public class VirtuFit : GenericSingleton<VirtuFit>
     private GameObject necklace;
     private GameObject Bangles1;
     private GameObject Bangles2;
-#endregion
+    #endregion
 
+    public void DevStart()
+    {
+        GameManager.Instance.UpdateAvatarCode("0001", "144");
+        ImportGLBAsync();
+    }
 #region GLB Model Loading
 
-    public void ImportGLBAsync(string filepath)
+    public void ImportGLBAsync()
     {
         if (GameManager.Instance.MyTwin != null)
         {
