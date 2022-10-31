@@ -38,7 +38,7 @@ public class VirtuFit : GenericSingleton<VirtuFit>
 
     public void DevStart()
     {
-        GameManager.Instance.UpdateAvatarCode("0001", "144");
+        GameManager.Instance.UpdateAvatarCode("0002", "144");
         ImportGLBAsync();
     }
 #region GLB Model Loading
